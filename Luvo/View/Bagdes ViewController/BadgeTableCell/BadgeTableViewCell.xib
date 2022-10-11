@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Nunito-ExtraBold.ttf">
+            <string>Nunito-ExtraBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BadgeTableViewCell" rowHeight="150" id="KGk-i7-Jjw" customClass="BadgeTableViewCell" customModule="Luvo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Le3-EL-OME" customClass="UIView_Designable" customModule="Luvo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6ne-ry-6jc">
+                                <rect key="frame" x="8" y="7" width="85" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="MHC-6i-fQm"/>
+                                    <constraint firstAttribute="height" constant="85" id="bXh-Eu-j57"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bG7-KI-cmx">
+                                <rect key="frame" x="241" y="32" width="71" height="34"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="71" id="Cep-Rx-Vte"/>
+                                    <constraint firstAttribute="height" constant="34" id="vl7-jo-DP6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYS-pm-O9n">
+                                <rect key="frame" x="101" y="7" width="132" height="84"/>
+                                <fontDescription key="fontDescription" name="Nunito-ExtraBold" family="Nunito" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="TYS-pm-O9n" firstAttribute="leading" secondItem="6ne-ry-6jc" secondAttribute="trailing" constant="8" symbolic="YES" id="4lz-AJ-QId"/>
+                            <constraint firstItem="6ne-ry-6jc" firstAttribute="top" secondItem="Le3-EL-OME" secondAttribute="top" constant="7" id="9Wr-eO-Hgm"/>
+                            <constraint firstAttribute="bottom" secondItem="6ne-ry-6jc" secondAttribute="bottom" constant="7" id="B6O-3e-HSG"/>
+                            <constraint firstAttribute="bottom" secondItem="bG7-KI-cmx" secondAttribute="bottom" constant="33" id="VA0-ZL-xrt"/>
+                            <constraint firstAttribute="trailing" secondItem="bG7-KI-cmx" secondAttribute="trailing" constant="8" id="Wd6-CE-8LA"/>
+                            <constraint firstAttribute="bottom" secondItem="TYS-pm-O9n" secondAttribute="bottom" constant="8" id="Whf-4V-hk7"/>
+                            <constraint firstItem="bG7-KI-cmx" firstAttribute="top" secondItem="Le3-EL-OME" secondAttribute="top" constant="32" id="nkO-EC-wxd"/>
+                            <constraint firstItem="bG7-KI-cmx" firstAttribute="leading" secondItem="TYS-pm-O9n" secondAttribute="trailing" constant="8" symbolic="YES" id="tgj-Tj-wHk"/>
+                            <constraint firstItem="6ne-ry-6jc" firstAttribute="leading" secondItem="Le3-EL-OME" secondAttribute="leading" constant="8" id="tlc-jD-GIO"/>
+                            <constraint firstItem="TYS-pm-O9n" firstAttribute="top" secondItem="Le3-EL-OME" secondAttribute="top" constant="7" id="yB3-2Z-YoD"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Le3-EL-OME" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="GsJ-aW-hbq"/>
+                    <constraint firstItem="Le3-EL-OME" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="HcB-18-bpj"/>
+                    <constraint firstAttribute="trailing" secondItem="Le3-EL-OME" secondAttribute="trailing" id="IWd-7O-dHY"/>
+                    <constraint firstAttribute="bottom" secondItem="Le3-EL-OME" secondAttribute="bottom" constant="11" id="yFr-Eh-iOW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="imgLogo" destination="6ne-ry-6jc" id="WBg-8Q-kR8"/>
+                <outlet property="lblBadgePoint" destination="bG7-KI-cmx" id="e2o-Oo-ol4"/>
+                <outlet property="lblMsg" destination="TYS-pm-O9n" id="6wB-6K-52i"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="135.9375"/>
+        </tableViewCell>
+    </objects>
+</document>

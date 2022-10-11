@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>246395474708-r25pb7shvba4b18fbkj12dvmgndp44ig.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.246395474708-r25pb7shvba4b18fbkj12dvmgndp44ig</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>246395474708-91kgkknk9qr39gcqk25vgs744k1eaf4b.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB77hsFgNA5BGQ90pnoew0mZZ2_aSEqEQc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>246395474708</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.BCS.Luvo</string>
+	<key>PROJECT_ID</key>
+	<string>luvo-d06e0</string>
+	<key>STORAGE_BUCKET</key>
+	<string>luvo-d06e0.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<true/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:246395474708:ios:b1fe9a480bbdb51144e801</string>
+</dict>
+</plist>
