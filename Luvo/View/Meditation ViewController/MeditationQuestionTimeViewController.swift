@@ -53,6 +53,7 @@ class MeditationQuestionTimeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         //Setup navbar
         setupCustomNavBar()

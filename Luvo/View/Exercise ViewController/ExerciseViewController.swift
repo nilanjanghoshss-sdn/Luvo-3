@@ -18,7 +18,7 @@ class ExerciseViewController: UIViewController {
     @IBOutlet var viewSteps: UIView_Designable!
     @IBOutlet var btnSave: UIBUtton_Designable!
     @IBOutlet var txtSteps: UITextField!
-    
+    var isFromSave = false
     var isGoalSet = false
 //    var tempStepAcheive = ""
     
@@ -27,6 +27,7 @@ class ExerciseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         //Setup navbar
         setupCustomNavBar()
@@ -39,6 +40,7 @@ class ExerciseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isFromSave = false
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(FAQViewController.setupNotificationBadge),
                                                name: NSNotification.Name(ConstantLocalNotification.updateNotificationBadge),
@@ -114,6 +116,7 @@ class ExerciseViewController: UIViewController {
     
     //MARK: - Button Func
     @IBAction func btnSave(_ sender: Any) {
+        isFromSave = true
         //api call here
         let connectionStatus = ConnectionManager.shared.hasConnectivity()
         if (connectionStatus == false) {
@@ -127,6 +130,8 @@ class ExerciseViewController: UIViewController {
                 return
             }
             let dailyGoal = RemoveZeroFromPrefix(stringNum: txtSteps.text)
+            UserDefaults.standard.set(dailyGoal, forKey: "UpdatedSteps")
+            UserDefaults.standard.set(true, forKey: "isFromSave")
             let request = ExerciseGoalRequest(daily_goal: dailyGoal)
             self.view.startActivityIndicator(title: ConstantActivityIndicatorMessage.pkLoading, color: .white)
             exerciseViewModel.setDailyGoal(goalRequest: request, token: token)
@@ -222,11 +227,32 @@ extension ExerciseViewController: GetGoalDelegate {
     func sentToNextPage(stepAcheived: String) {
         isFromBackExercise = true
         isGoalSet = true
+        
+        let status = UserDefaults.standard.bool(forKey: "FromHomeEdit")
+                        print(status)
+            if status == true
+        {
+                debugPrint("HElo")
+                if isFromSave == true
+                {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                else
+                {
+                    
+                }
+                
+            }
+        
+        else
+        {
+        
         let exerciseTimeVC = ConstantStoryboard.exerciseStoryboard.instantiateViewController(withIdentifier: "ExerciseTimeViewController") as! ExerciseTimeViewController
         exerciseTimeVC.totalStepGoal = RemoveZeroFromPrefix(stringNum: txtSteps.text)
         exerciseTimeVC.stepAcheived = stepAcheived
 //        exerciseTimeVC.exerciseFinishModel = ExerciseFinishRequest(targetTime: nil, completedTime: nil, type: nil, steps: nil, miles: nil)
         self.navigationController?.pushViewController(exerciseTimeVC, animated: true)
+        }
     }
     
     func RemoveZeroFromPrefix(stringNum: String?) -> String {

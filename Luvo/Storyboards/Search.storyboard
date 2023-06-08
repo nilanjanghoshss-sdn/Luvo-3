@@ -6,19 +6,16 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="Nunito-Bold.ttf">
             <string>Nunito-Bold</string>
         </array>
-        <array key="Nunito-ExtraBold.ttf">
+        <array key="Nunito-VariableFont_wght.ttf">
             <string>Nunito-ExtraBold</string>
-        </array>
-        <array key="Nunito-Regular.ttf">
             <string>Nunito-Regular</string>
-        </array>
-        <array key="Nunito-SemiBold.ttf">
             <string>Nunito-SemiBold</string>
         </array>
     </customFonts>
@@ -31,10 +28,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerHome" translatesAutoresizingMaskIntoConstraints="NO" id="Pct-cl-W9s">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerHome" translatesAutoresizingMaskIntoConstraints="NO" id="Pct-cl-W9s">
                                 <rect key="frame" x="0.0" y="95" width="414" height="228"/>
                             </imageView>
-                            <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJE-qR-beM">
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJE-qR-beM">
                                 <rect key="frame" x="0.0" y="95" width="414" height="228"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWq-Ll-FQX">
@@ -63,6 +60,87 @@
                                     <constraint firstItem="lWq-Ll-FQX" firstAttribute="leading" secondItem="cJE-qR-beM" secondAttribute="leading" constant="149" id="ggc-MU-Hgk"/>
                                 </constraints>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Gls-d9-1os">
+                                <rect key="frame" x="0.0" y="100" width="414" height="228"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="228" id="2EQ-7V-Fmh"/>
+                                    <constraint firstAttribute="width" constant="414" id="Oix-jb-TgB"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uPv-2Q-y4Y">
+                                    <size key="itemSize" width="404" height="215"/>
+                                    <size key="estimatedItemSize" width="372" height="215"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchCellBanner" id="gbH-jw-5MH" customClass="SearchCellBanner" customModule="Luvo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="6.5" width="404" height="215"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5Sn-Na-7zX">
+                                            <rect key="frame" x="0.0" y="0.0" width="404" height="215"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3xQ-Wd-lEC">
+                                                    <rect key="frame" x="0.0" y="0.0" width="446" height="215"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xmx-sz-k6M">
+                                                    <rect key="frame" x="0.0" y="0.0" width="435" height="215"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Om-Y9-pYK">
+                                                    <rect key="frame" x="135" y="54" width="230" height="83"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="230" id="7ax-mv-xBD"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="83" id="vHy-Vh-Ink"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Nunito-ExtraBold" family="Nunito" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mother Teresa" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVm-9n-aTa">
+                                                    <rect key="frame" x="135" y="128" width="229" height="20.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="229" id="fof-O8-MKI"/>
+                                                        <constraint firstAttribute="height" constant="20.5" id="wq2-zt-44u"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="10"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="xmx-sz-k6M" secondAttribute="bottom" id="5r6-VX-bvb"/>
+                                                <constraint firstAttribute="bottom" secondItem="3xQ-Wd-lEC" secondAttribute="bottom" id="73q-j7-qMJ"/>
+                                                <constraint firstItem="3xQ-Wd-lEC" firstAttribute="leading" secondItem="5Sn-Na-7zX" secondAttribute="leading" id="CWM-pN-Qc0"/>
+                                                <constraint firstItem="xmx-sz-k6M" firstAttribute="width" secondItem="3xQ-Wd-lEC" secondAttribute="width" multiplier="0.659341" constant="141.03296703296706" id="NWH-uH-qMu"/>
+                                                <constraint firstItem="iVm-9n-aTa" firstAttribute="top" secondItem="5Sn-Na-7zX" secondAttribute="top" constant="128" id="NZ4-Hw-7qG"/>
+                                                <constraint firstItem="iVm-9n-aTa" firstAttribute="leading" secondItem="5Sn-Na-7zX" secondAttribute="leading" constant="135" id="SZD-eB-3ec"/>
+                                                <constraint firstItem="xmx-sz-k6M" firstAttribute="height" secondItem="3xQ-Wd-lEC" secondAttribute="height" multiplier="0.595349" constant="87" id="T3J-ih-Dzt"/>
+                                                <constraint firstAttribute="trailing" secondItem="3xQ-Wd-lEC" secondAttribute="trailing" constant="-42" id="UAz-q4-AKr"/>
+                                                <constraint firstItem="0Om-Y9-pYK" firstAttribute="top" secondItem="5Sn-Na-7zX" secondAttribute="top" constant="54" id="ZNZ-Fh-b8y"/>
+                                                <constraint firstItem="xmx-sz-k6M" firstAttribute="leading" secondItem="5Sn-Na-7zX" secondAttribute="leading" id="Zfc-7Z-rsl"/>
+                                                <constraint firstItem="3xQ-Wd-lEC" firstAttribute="top" secondItem="5Sn-Na-7zX" secondAttribute="top" id="bco-5F-AlL"/>
+                                                <constraint firstItem="0Om-Y9-pYK" firstAttribute="leading" secondItem="5Sn-Na-7zX" secondAttribute="leading" constant="135" id="f9z-my-fIb"/>
+                                                <constraint firstItem="xmx-sz-k6M" firstAttribute="top" secondItem="5Sn-Na-7zX" secondAttribute="top" id="iYw-xH-24S"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="404" height="215"/>
+                                        <connections>
+                                            <outlet property="imgView" destination="3xQ-Wd-lEC" id="DcY-a3-umS"/>
+                                            <outlet property="imgView1" destination="xmx-sz-k6M" id="CpX-8O-HyV"/>
+                                            <outlet property="lblAuthor" destination="iVm-9n-aTa" id="KQ2-5y-8yg"/>
+                                            <outlet property="lbquotes" destination="0Om-Y9-pYK" id="zLe-bp-a0d"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="dqM-m2-jt7"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="A0C-b5-mdR"/>
+                                </connections>
+                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zU8-aP-RM4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="104"/>
                                 <subviews>
@@ -561,6 +639,7 @@
                             <constraint firstItem="XzE-d8-FuT" firstAttribute="leading" secondItem="zTj-Cr-dFC" secondAttribute="leading" id="74M-Zr-KSD"/>
                             <constraint firstItem="Pct-cl-W9s" firstAttribute="top" secondItem="cJE-qR-beM" secondAttribute="top" id="7Sd-9g-2KB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2qg-3V-YdQ" secondAttribute="bottom" id="8pL-tQ-CFW"/>
+                            <constraint firstItem="Gls-d9-1os" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="56" id="ACn-8i-oiO"/>
                             <constraint firstItem="XzE-d8-FuT" firstAttribute="top" secondItem="zTj-Cr-dFC" secondAttribute="bottom" constant="10" id="C9j-jX-iuP"/>
                             <constraint firstItem="Pct-cl-W9s" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="DjU-8f-Ny9"/>
                             <constraint firstItem="Pct-cl-W9s" firstAttribute="trailing" secondItem="cJE-qR-beM" secondAttribute="trailing" id="Dyh-za-ooA"/>
@@ -578,9 +657,11 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Pct-cl-W9s" secondAttribute="trailing" id="qh1-pj-BFR"/>
                             <constraint firstItem="Pct-cl-W9s" firstAttribute="top" secondItem="zU8-aP-RM4" secondAttribute="bottom" constant="-9" id="rbx-ZD-J71"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2qg-3V-YdQ" secondAttribute="trailing" id="u7E-Hu-qQJ"/>
+                            <constraint firstItem="Gls-d9-1os" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="yUi-qa-0Td"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collBanner" destination="Gls-d9-1os" id="1CT-k9-oU6"/>
                         <outlet property="lblQuoteAuthor" destination="n1y-0a-o6k" id="fEa-e0-8F1"/>
                         <outlet property="lblQuotes" destination="lWq-Ll-FQX" id="sxr-ud-2Ww"/>
                         <outlet property="tblSearchAudio" destination="2qg-3V-YdQ" id="11i-lf-g0I"/>

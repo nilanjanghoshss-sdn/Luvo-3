@@ -104,14 +104,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnSignUp(_ sender: Any) {
-//        UserDefaults.standard.set(false, forKey: ConstantUserDefaultTag.udSocialLoginBool)  //To check and set profile image accordingly on SideMenu & ProfileVC
-//        let signupVC = ConstantStoryboard.mainStoryboard.instantiateViewController(identifier: "SignUpViewController") as! SignUpViewController
-//       self.navigationController?.pushViewController(signupVC, animated: true)
-        
+        UserDefaults.standard.set(false, forKey: ConstantUserDefaultTag.udSocialLoginBool)  //To check and set profile image accordingly on SideMenu & ProfileVC
+        let signupVC = ConstantStoryboard.mainStoryboard.instantiateViewController(identifier: "SignUpViewController") as! SignUpViewController
+       self.navigationController?.pushViewController(signupVC, animated: true)
+
 
         
-                let signupVC = ConstantStoryboard.Coach.instantiateViewController(identifier: "CoachViewController") as! CoachViewController
-                self.navigationController?.pushViewController(signupVC, animated: true)
+              
     }
     
 }
@@ -123,6 +122,8 @@ extension LoginViewController: WebviewDelegate, LoginViewModelDelegate {
         self.view.stopActivityIndicator()
         
         if(loginResponse?.status != nil && loginResponse?.status?.lowercased() == ConstantStatusAPI.success && loginResponse?.userDetail != nil) {
+
+
             //            dump(loginResponse?.userDetail)
             
             let userDetails = LoginUserDetails(_id: loginResponse?.userDetail?._id, userId: loginResponse?.userDetail?.userId, userName: loginResponse?.userDetail?.userName, userEmail: loginResponse?.userDetail?.userEmail, mobileNo: loginResponse?.userDetail?.mobileNo, profileImg: loginResponse?.userDetail?.profileImg, otp: loginResponse?.userDetail?.otp, status: loginResponse?.userDetail?.status, chakraRes: loginResponse?.userDetail?.chakraRes, socialId: loginResponse?.userDetail?.socialId, socialType: loginResponse?.userDetail?.socialType, timeZone: loginResponse?.userDetail?.timeZone, location: loginResponse?.userDetail?.location)
@@ -132,14 +133,18 @@ extension LoginViewController: WebviewDelegate, LoginViewModelDelegate {
                 let dataEncode = try JSONEncoder().encode(userDetails)
                 UserDefaults.standard.set(dataEncode, forKey: ConstantUserDefaultTag.udUserDetails)
                 UserDefaults.standard.set(loginResponse?.userDetail?.userId, forKey: ConstantUserDefaultTag.udUserId)
+                UserDefaults.standard.set(loginResponse?.userDetail?.userName, forKey: ConstantUserDefaultTag.udUserName)
+                UserDefaults.standard.set(loginResponse?.userDetail?.userEmail, forKey: ConstantUserDefaultTag.udUserEmail)
                 UserDefaults.standard.set(loginResponse?.tokenValidate, forKey: ConstantUserDefaultTag.udToken)
+
                 
             } catch let error {
                 print(error.localizedDescription)
             }
             
-            //            //Need to check Question answer flag API, if success then HomeVC (rememberMe = true) other wise QuestionOneVC (rememberMe = false, set true in Chakra screen)
+            //            //Need to check Question answer flag API, if success then HomeVC (rememberMe = true) other wise QuestionOneVC (rememberMe = false, set true in Chakra screen) udUserEmail
             if loginResponse?.userDetail?.chakraRes == 0 {
+                
                 UserDefaults.standard.set(true, forKey: ConstantUserDefaultTag.udTempRememberMe)
                 UserDefaults.standard.set(false, forKey: ConstantUserDefaultTag.udQuestions) //Bool
                 
@@ -151,12 +156,15 @@ extension LoginViewController: WebviewDelegate, LoginViewModelDelegate {
 //
 //                let homeVC = ConstantStoryboard.mainStoryboard.instantiateViewController(identifier: "BaseTabBarViewController") as! BaseTabBarViewController
 //                self.navigationController?.pushViewController(homeVC, animated: true)
+                
                 let refreshAlert = UIAlertController(title: "Luvo", message: "Do you want to measure your regular activities through", preferredStyle: UIAlertController.Style.alert)
 
                 refreshAlert.addAction(UIAlertAction(title: "iPhone", style: .default, handler: { (action: UIAlertAction!) in
                       print("Handle Ok logic here")
                                     UserDefaults.standard.set(false, forKey: "isFromWatch")
                                      UserDefaults.standard.set(false, forKey: "isPermissiongranted")
+                                     UserDefaults.standard.set(false, forKey: "isFromRecordedSession")
+                                    UserDefaults.standard.set(false, forKey: "isFromCoachRecordedSession")
                
                                     UserDefaults.standard.set(true, forKey: ConstantUserDefaultTag.udRememberMe) //Bool always true for social login
                                     UserDefaults.standard.set(true, forKey: ConstantUserDefaultTag.udQuestions) //Bool
@@ -177,6 +185,7 @@ extension LoginViewController: WebviewDelegate, LoginViewModelDelegate {
                 }))
 
                 present(refreshAlert, animated: true, completion: nil)
+                
             }
             
             //Remove stored Apple login data
@@ -230,17 +239,37 @@ extension LoginViewController: WebviewDelegate, LoginViewModelDelegate {
         if(loginResponse?.status != nil && loginResponse?.status?.lowercased() == ConstantStatusAPI.success && loginResponse?.userDetail != nil) {
             //            dump(loginResponse?.userDetail)
             
-            let userDetails = LoginUserDetails(_id: loginResponse?.userDetail?._id, userId: loginResponse?.userDetail?.userId, userName: loginResponse?.userDetail?.userName, userEmail: loginResponse?.userDetail?.userEmail, mobileNo: loginResponse?.userDetail?.mobileNo, profileImg: loginResponse?.userDetail?.profileImg, otp: loginResponse?.userDetail?.otp, status: loginResponse?.userDetail?.status, chakraRes: loginResponse?.userDetail?.chakraRes, socialId: loginResponse?.userDetail?.socialId, socialType: loginResponse?.userDetail?.socialType, timeZone: loginResponse?.userDetail?.timeZone, location: loginResponse?.userDetail?.location)
+            let userDetails = LoginUserDetails(_id: loginResponse?.userDetail?._id, userId: loginResponse?.userDetail?.userId, userName: loginResponse?.userDetail?.userName, userEmail: loginResponse?.userDetail?.userEmail, mobileNo: loginResponse?.userDetail?.mobileNo, profileImg: loginResponse?.userDetail?.profileImg, otp: loginResponse?.userDetail?.otp, status: loginResponse?.userDetail?.status, chakraRes: loginResponse?.userDetail?.chakraRes, socialId: loginResponse?.userDetail?.socialId, socialType: loginResponse?.userDetail?.socialType, timeZone: loginResponse?.userDetail?.timeZone, location: loginResponse?.userDetail?.location,type: loginResponse?.userDetail?.type)
             
             do {
                 //Check Readme doc to extract data and Decode from userDefault
                 let dataEncode = try JSONEncoder().encode(userDetails)
                 UserDefaults.standard.set(dataEncode, forKey: ConstantUserDefaultTag.udUserDetails)
                 UserDefaults.standard.set(loginResponse?.userDetail?.userId, forKey: ConstantUserDefaultTag.udUserId)
+                UserDefaults.standard.set(loginResponse?.userDetail?.userName, forKey: ConstantUserDefaultTag.udUserName)
+                UserDefaults.standard.set(loginResponse?.userDetail?.userEmail, forKey: ConstantUserDefaultTag.udUserEmail)
                 UserDefaults.standard.set(loginResponse?.tokenValidate, forKey: ConstantUserDefaultTag.udToken)
             } catch let error {
                 print(error.localizedDescription)
             }
+
+            print(loginResponse?.userDetail?.deleted ?? "")
+            if loginResponse?.userDetail?.deleted == true
+            {
+
+                let refreshAlert = UIAlertController(title: "Luvo", message: "Your acount is permanently deleted", preferredStyle: UIAlertController.Style.alert)
+
+                refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+                      print("Handle Ok logic here")
+
+                }))
+
+
+
+                present(refreshAlert, animated: true, completion: nil)
+            }
+            else
+            {
             
             if (loginResponse?.userDetail?.status == "Active") {
                 //Need to check Question answer flag (chakraRes) API, if success then HomeVC (rememberMe = true) other wise QuestionOneVC (rememberMe = false, set true in Chakra screen)
@@ -254,6 +283,23 @@ extension LoginViewController: WebviewDelegate, LoginViewModelDelegate {
                     
                 } else {
                     
+                    if loginResponse?.userDetail?.type == "Coach"
+                    {
+                        //boolRememberMe = true
+                        UserDefaults.standard.set(loginResponse?.userDetail?.chakraRes, forKey: ConstantUserDefaultTag.udBlockedChakraLevel)
+                        UserDefaults.standard.set(loginResponse?.userDetail?.location, forKey: "CoachProfileImage")
+                        UserDefaults.standard.set(loginResponse?.userDetail?.userId, forKey: "CoachID")
+                        debugPrint(UserDefaults.standard.value(forKey: "CoachProfileImage") ?? "Test")
+                        
+                       // UserDefaults.standard.set(false, forKey: ConstantUserDefaultTag.udQuestions) //Bool
+                        UserDefaults.standard.set(true, forKey: ConstantUserDefaultTag.udRememberMe)
+                        UserDefaults.standard.set(true, forKey: ConstantUserDefaultTag.udFromCoachVC)
+                        let signupVC = ConstantStoryboard.Coach.instantiateViewController(identifier: "CoachViewController") as! CoachViewController
+                        self.navigationController?.pushViewController(signupVC, animated: true)
+                        
+                    }
+                    else
+                    {
                     let refreshAlert = UIAlertController(title: "Luvo", message: "Do you want to measure your regular activities through", preferredStyle: UIAlertController.Style.alert)
 
                     refreshAlert.addAction(UIAlertAction(title: "iPhone", style: .default, handler: { (action: UIAlertAction!) in
@@ -280,9 +326,10 @@ extension LoginViewController: WebviewDelegate, LoginViewModelDelegate {
 
                     present(refreshAlert, animated: true, completion: nil)
                     
-
+                    }
                 }
-            } else {
+            }
+                else {
                 UserDefaults.standard.set(boolRememberMe, forKey: ConstantUserDefaultTag.udTempRememberMe)
                 let otpVC = ConstantStoryboard.mainStoryboard.instantiateViewController(identifier: "OTPViewController") as! OTPViewController
                 otpVC.fromVC = "loginVC"
@@ -292,11 +339,12 @@ extension LoginViewController: WebviewDelegate, LoginViewModelDelegate {
             
             //Start all time step tracking in app delegate
             (UIApplication.shared.delegate as? AppDelegate)?.startTracking()
-            
+            }
         } else if (loginResponse?.status == nil) {
             showAlert(title: ConstantAlertTitle.LuvoAlertTitle, message: loginResponse?.message ?? ConstantAlertMessage.TryAgainLater)
         }
     }
+
     
     func didReceiveLoginError(statusCode: String?) {
         self.view.stopActivityIndicator()
@@ -587,7 +635,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                         switch credentialState {
                         case .authorized:
                             // The Apple ID credential is valid.
-                            self.showAlert(title: ConstantAlertTitle.LuvoAlertTitle, message: "Apple Sign In successful")
+                          //  self.showAlert(title: ConstantAlertTitle.LuvoAlertTitle, message: "Apple Sign In successful")
                             
                             //------------------------------------------
                             guard let FCMToken = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udFCMToken) as? String else {

@@ -19,9 +19,14 @@ struct HomeResponse: Decodable {
     let gratitude: Gratitude?
     let blogs: [Blogs]?
     let exercises: [Exercises]?
+    let live: [Live]?
+    let recording: [Recording]?
     let daily_goal: Int?
     let unread_notification: Int?
     let user_badges: [BadgeModel]?
+    let upcoming: [UpComingData]?
+    let quotesArray: [QuotesData]?
+    let isPaymented: Bool?
     
     enum CodingKeys: String, CodingKey {
         case status
@@ -35,9 +40,14 @@ struct HomeResponse: Decodable {
         case gratitude
         case blogs
         case exercises
+        case live
+        case recording
         case daily_goal
         case unread_notification
         case user_badges
+        case upcoming
+        case quotesArray
+        case isPaymented
     }
 }
 
@@ -176,5 +186,128 @@ struct Exercises: Decodable {
         case exercise_img
         case name
         case location
+    }
+}
+
+struct Live: Decodable {
+    
+    let _id: String?
+    let categoryName: String?
+    let categoryImage: String?
+    let categoryAddedBy: String?
+    let status: String?
+    let categoryThumbnail: String?
+    let ctgryId: String?
+    let location: String?
+    let locationThumbnail: String?
+    let addedOn: String?
+    
+    
+    
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case _id
+        case categoryName
+        case categoryImage
+        case categoryAddedBy
+        case status
+        case categoryThumbnail
+        case ctgryId
+        case location
+        case locationThumbnail
+        case addedOn
+        
+    
+    }
+
+}
+
+struct Recording: Decodable {
+    
+    let _id: String?
+    let status: String?
+    let reclocation: String?
+    let categoryAddedBy: String?
+    let categoryImage: String?
+    let categoryThumbnail: String?
+    let ctgryId: String?
+    let location: String?
+    let addedOn: String?
+    let categoryName: String?
+    let sessionName: String?
+    
+    
+    
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case _id
+        case status
+        case reclocation
+        case categoryAddedBy
+        case categoryImage
+        case categoryThumbnail
+        case ctgryId
+        case location
+        case addedOn
+        case categoryName
+        case sessionName
+        
+    
+    }
+
+}
+
+struct UpComingData: Decodable
+{
+    
+    let coachname: String?
+    let coachemail: String?
+    let sessionEndtime: String?
+    let sessionName: String?
+    let sessionStarttime: String?
+    let sessionThumbnailLocation: String?
+    let agoraAccessToken: String?
+    let agoraAppId: String?
+    let channelName: String?
+    let ctgryId: String?
+    let sessionStatus: String?
+    let categoryName: String?
+    let _id: String?
+    let coachProfileImage: String?
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case coachname
+        case coachemail
+        case sessionEndtime
+        case sessionName
+        case sessionStarttime
+        case sessionThumbnailLocation
+        case agoraAccessToken
+        case agoraAppId
+        case channelName
+        case ctgryId
+        case sessionStatus
+        case categoryName
+        case _id
+        case coachProfileImage
+        
+    }
+}
+
+struct QuotesData: Decodable
+{
+    let quote: String?
+    let authorName: String?
+    let status: String?
+
+    enum CodingKeys: String, CodingKey {
+
+        case quote
+        case authorName
+        case status
+
     }
 }

@@ -24,10 +24,10 @@ struct SignupValidation {
             return ValidationResult(success: false, error: ConstantTextfieldAlertTitle.userPasswordIsEmpty)
         }
         if (signupRequest.mobileNo!.isEmpty) {
-            return ValidationResult(success: false, error: ConstantTextfieldAlertTitle.userPhoneIsEmpty)
+            //return ValidationResult(success: false, error: ConstantTextfieldAlertTitle.userPhoneIsEmpty)
         }
         if let phone = signupRequest.mobileNo {
-            if (phone.count < 10) {
+            if (phone.count == 1 || phone.count == 2 || phone.count == 3 || phone.count == 4 || phone.count == 5 || phone.count == 6 || phone.count == 7 || phone.count == 8 || phone.count == 9) {
                 return ValidationResult(success: false, error: ConstantTextfieldAlertTitle.phoneValidation)
             }
         }

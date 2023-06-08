@@ -35,6 +35,8 @@ struct LoginUserDetails: Codable {
     let socialType: String?
     var timeZone: String?
     var location: String?
+    var type: String?
+    var deleted: Bool?
     
     enum CodingKeys: String, CodingKey {
         case _id
@@ -50,5 +52,7 @@ struct LoginUserDetails: Codable {
         case socialType
         case timeZone
         case location
+        case type
+        case deleted
     }
 }

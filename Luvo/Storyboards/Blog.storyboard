@@ -181,7 +181,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHN-hK-pMl" customClass="UIView_Designable" customModule="Luvo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="170" height="200"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerHome" translatesAutoresizingMaskIntoConstraints="NO" id="g4q-TT-mlJ">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerHome" translatesAutoresizingMaskIntoConstraints="NO" id="g4q-TT-mlJ">
                                                             <rect key="frame" x="8" y="8" width="154" height="92"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="HwU-5g-EXG">

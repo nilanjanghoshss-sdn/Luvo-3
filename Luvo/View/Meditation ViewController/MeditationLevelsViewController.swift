@@ -98,7 +98,13 @@ class MeditationLevelsViewController: UIViewController {
     
     func setupImageData() {
         let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
-        
+        let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
+        let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+               print(crownList)
+               print("chakra level ...--->>>",chakraLevel)
+               print("coloris ...--->>>",chakraColour)
+
+        if chakraColour == 0{
         switch chakraLevel {
         case 1:
             arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
@@ -174,7 +180,162 @@ class MeditationLevelsViewController: UIViewController {
             arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
             break
         }
-        
+        }
+        else if crownList == 1 {
+        switch chakraColour {
+        case 1:
+            arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "heartBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "solarBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "sacralBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+            break
+        case 2:
+            arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "heartBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "solarBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+            arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+            break
+        case 3:
+            arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "heartBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+            arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+            arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+            break
+        case 4:
+            arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "heartC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.green), active: true))
+            arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+            arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+            arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+            break
+        case 5:
+            arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "throatC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.blue), active: true))
+            arrayImage.append(LevelModel(image: "heartC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.green), active: true))
+            arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+            arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+            arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+            break
+        case 6:
+            arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "thirdeyeC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.purple), active: true))
+            arrayImage.append(LevelModel(image: "throatC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.blue), active: true))
+            arrayImage.append(LevelModel(image: "heartC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.green), active: true))
+            arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+            arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+            arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+            break
+        case 7:
+            arrayImage.append(LevelModel(image: "crownC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.violet), active: true))
+            arrayImage.append(LevelModel(image: "thirdeyeC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.purple), active: true))
+            arrayImage.append(LevelModel(image: "throatC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.blue), active: true))
+            arrayImage.append(LevelModel(image: "heartC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.green), active: true))
+            arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+            arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+            arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+            break
+            
+        default:
+            arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "heartBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "solarBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "sacralBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+            arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+            break
+        }
+
+        }else
+        {
+            switch chakraLevel {
+            case 1:
+                arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "heartBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "solarBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "sacralBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+                break
+            case 2:
+                arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "heartBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "solarBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+                arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+                break
+            case 3:
+                arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "heartBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+                arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+                arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+                break
+            case 4:
+                arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "heartC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.green), active: true))
+                arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+                arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+                arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+                break
+            case 5:
+                arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "throatC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.blue), active: true))
+                arrayImage.append(LevelModel(image: "heartC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.green), active: true))
+                arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+                arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+                arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+                break
+            case 6:
+                arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "thirdeyeC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.purple), active: true))
+                arrayImage.append(LevelModel(image: "throatC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.blue), active: true))
+                arrayImage.append(LevelModel(image: "heartC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.green), active: true))
+                arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+                arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+                arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+                break
+            case 7:
+                arrayImage.append(LevelModel(image: "crownC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.violet), active: true))
+                arrayImage.append(LevelModel(image: "thirdeyeC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.purple), active: true))
+                arrayImage.append(LevelModel(image: "throatC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.blue), active: true))
+                arrayImage.append(LevelModel(image: "heartC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.green), active: true))
+                arrayImage.append(LevelModel(image: "solarC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.yellow), active: true))
+                arrayImage.append(LevelModel(image: "sacralC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.orange), active: true))
+                arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+                break
+                
+            default:
+                arrayImage.append(LevelModel(image: "crownBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "thirdeyeBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "throatBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "heartBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "solarBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "sacralBW", backgroundColor: UIColor(hexString: "#AFAFAF"), active: false))
+                arrayImage.append(LevelModel(image: "rootC", backgroundColor: UIColor(hexString: ConstantThemeSolidColor.red), active: true))
+                break
+            }
+        }
 //        if chakraLevel == 7 {
 //
 //        } else if chakraLevel == 6 {

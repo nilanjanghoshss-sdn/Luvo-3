@@ -28,6 +28,7 @@ class ExerciseStatsViewController: UIViewController {
     @IBOutlet var btnMonthly: UIBUtton_Designable!
     @IBOutlet var btnYearly: UIBUtton_Designable!
     @IBOutlet var imgStep: UIImageView!
+    @IBOutlet var imgVWEdit: UIImageView!
     @IBOutlet var lblStep: UILabel!
     @IBOutlet var lblStepsCount: UILabel!
     @IBOutlet var imgDistance: UIImageView!
@@ -111,6 +112,8 @@ class ExerciseStatsViewController: UIViewController {
             chartLabel = ConstantChartLabel.today
             xLabel = ConstantChartLabel.today
 //        }
+       // print(stepsGoal)
+        //refreshData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -129,6 +132,15 @@ class ExerciseStatsViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         viewCustomNavBar.shadowLayerView()
+    }
+    
+    @IBAction func btnEdit(_ sender: Any) {
+        
+        UserDefaults.standard.set(true, forKey: "FromHomeEdit")
+        let Exercise = ConstantStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ExerciseViewController") as! ExerciseViewController
+        navigationController?.pushViewController(Exercise, animated: true)
+        
+        
     }
     
     //MARK: - Nav Button Func
@@ -190,6 +202,7 @@ class ExerciseStatsViewController: UIViewController {
         
         btnCalender.tintColor = UIColor.colorSetup()
         imgStep.tintColor = UIColor.colorSetup()
+        imgVWEdit.tintColor = UIColor.colorSetup()
         lblStep.textColor = UIColor.colorSetup()
         imgDistance.tintColor = UIColor.colorSetup()
         lblDistance.textColor = UIColor.colorSetup()
@@ -226,6 +239,13 @@ class ExerciseStatsViewController: UIViewController {
         let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
         let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
         print("coloris ...--->>>",chakraColour)
+        
+                let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+                
+                print(crownList)
+                print("chakra level ...--->>>",chakraLevel)
+                print("coloris ...--->>>",chakraColour)
+
         
         if chakraColour==0 {
             switch chakraLevel {
@@ -269,7 +289,7 @@ class ExerciseStatsViewController: UIViewController {
                 viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
                 break
             }
-        } else {
+        } else if crownList == 1{
             switch chakraColour {
             case 1:
                 //red
@@ -311,6 +331,51 @@ class ExerciseStatsViewController: UIViewController {
                 viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
                 break
             }
+        }
+        else{
+            
+            switch chakraLevel {
+            case 1:
+                //red
+                viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 2:
+                //orange
+                viewAcheivment.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 3:
+                //yellow
+                viewAcheivment.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 4:
+                //green
+                viewAcheivment.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 5:
+                //blue
+                viewAcheivment.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+            
+            case 6:
+                //violet
+                viewAcheivment.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 7:
+                //purple
+                viewAcheivment.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            default:
+                //red
+                viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+            }
+            
         }
                 
 
@@ -376,9 +441,21 @@ class ExerciseStatsViewController: UIViewController {
             //let myAttribute3 = [NSAttributedString.Key.font: UIFont(name: "Nunito-SemiBold", size: 24.0)!,
             //                    NSAttributedString.Key.foregroundColor: UIColor.gray]
             let myString3 = NSMutableAttributedString(string: " steps", attributes: myAttribute1 )
+            let status = UserDefaults.standard.bool(forKey: "isFromSave")
+            
+            if status==true
+            {
+                print(String(UserDefaults.standard.string(forKey: "UpdatedSteps") ?? "0"))
+                let attrString3 = NSMutableAttributedString(string: "\(steps)/\((UserDefaults.standard.string(forKey: "UpdatedSteps") ?? "0"))", attributes: [NSAttributedString.Key.foregroundColor: UIColor.colorSetup()])
+                attrString3.append(myString3)
+                lblStepsCount.attributedText = attrString3
+                UserDefaults.standard.set(false, forKey: "isFromSave")
+            }
+            else{
             let attrString3 = NSMutableAttributedString(string: "\(steps)/\(stepGoal)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.colorSetup()])
             attrString3.append(myString3)
             lblStepsCount.attributedText = attrString3
+            }
         }
         
         //Circular progress bar data

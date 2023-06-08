@@ -6,8 +6,15 @@
 //
 
 import UIKit
-
+class SearchCellBanner: UICollectionViewCell {
+    @IBOutlet var imgView: UIImageView!
+    @IBOutlet var imgView1: UIImageView!
+    @IBOutlet var lbquotes: UILabel!
+    @IBOutlet var lblAuthor: UILabel!
+}
 class SearchMeditationViewController: UIViewController {
+    
+    
     
     @IBOutlet var viewCustomNavBar: UIView!
     @IBOutlet var viewTopBanner: UIView!
@@ -16,6 +23,7 @@ class SearchMeditationViewController: UIViewController {
     @IBOutlet var txtSearch: UITextField!
     @IBOutlet weak var viewSearchBG: UIView!
     @IBOutlet var tblSearchAudio: UITableView!
+    @IBOutlet var collBanner: UICollectionView!
     
     var meditationAudioData: MeditationAudioResponse?
     var arrayAudioList = [MeditationMusics]()
@@ -24,6 +32,10 @@ class SearchMeditationViewController: UIViewController {
     var favViewModel = FavouritesViewModel()
     var messageQuetes: String = ""
     var authorName: String = "_"
+    var arrQuotes = [QuotesData]()
+    var scrollTimer: Timer?
+    var currenCallIndex = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +44,37 @@ class SearchMeditationViewController: UIViewController {
         setupCustomNavBar()
         setUpTableView()
         setupUI()
+        
+        debugPrint(arrQuotes.count)
+        debugPrint(arrQuotes.startIndex)
+      //  scrollTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(sliderNext), userInfo: nil, repeats: true)
+
+        
+    }
+    
+    @objc func sliderNext()
+    {
+        //homeData?.quotesArray?.count
+        debugPrint(arrQuotes.count )
+        
+        if currenCallIndex < (arrQuotes.count ) - 1
+        {
+            currenCallIndex = currenCallIndex + 1
+        }
+        else{
+            
+            currenCallIndex = 0
+        }
+        
+        if currenCallIndex == 0
+        {
+        collBanner.scrollToItem(at: IndexPath(item: currenCallIndex, section: 0), at: .left, animated: false)
+        }
+        
+        else
+        {
+        collBanner.scrollToItem(at: IndexPath(item: currenCallIndex, section: 0), at: .right, animated: true)
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -66,6 +109,10 @@ class SearchMeditationViewController: UIViewController {
         let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
         let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
         print("coloris .<>>>>>..--->>>",chakraColour)
+        let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+               
+               print(crownList)
+
         
         if chakraColour==0 {
             switch chakraLevel {
@@ -125,8 +172,68 @@ class SearchMeditationViewController: UIViewController {
                 
                 break
             }
-        } else {
+        } else if crownList == 1 {
             switch chakraColour {
+            case 1:
+//                viewTopBanner.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+//                viewSearchBG.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.35)
+                viewSearchBG.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.75)
+                break
+            case 2:
+//                viewTopBanner.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+//                viewSearchBG.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.4235294118, blue: 0, alpha: 0.35)
+                viewSearchBG.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.4235294118, blue: 0, alpha: 0.75)
+                break
+            case 3:
+//                viewTopBanner.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+//                viewSearchBG.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.6980392157, blue: 0, alpha: 0.3001468165)
+                viewSearchBG.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.7019607843, blue: 0.01568627451, alpha: 0.7534304991)
+                break
+            case 4:
+//                viewTopBanner.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+//                viewSearchBG.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0, green: 0.6509803922, blue: 0.1725490196, alpha: 0.3541517447)
+                viewSearchBG.backgroundColor = #colorLiteral(red: 0, green: 0.6509803922, blue: 0.1725490196, alpha: 0.75)
+                
+                break
+            case 5:
+//                viewTopBanner.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+//                viewSearchBG.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0, green: 0.6784313725, blue: 0.937254902, alpha: 0.75)
+                viewSearchBG.backgroundColor = #colorLiteral(red: 0, green: 0.6784313725, blue: 0.937254902, alpha: 0.75)
+                break
+            case 6:
+//                viewTopBanner.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+//                viewSearchBG.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+                viewSearchBG.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.75)
+                break
+            case 7:
+                
+//                viewTopBanner.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+//                viewSearchBG.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+                viewSearchBG.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.75)
+                
+                break
+            default:
+//                viewTopBanner.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+//                viewSearchBG.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.35)
+                viewSearchBG.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.75)
+                
+                break
+            }
+        }
+        else
+        {
+            switch chakraLevel {
             case 1:
 //                viewTopBanner.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
 //                viewSearchBG.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
@@ -232,6 +339,8 @@ class SearchMeditationViewController: UIViewController {
 
 //MARK: ------- Table view delegate and datasource ------
 extension SearchMeditationViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -440,4 +549,178 @@ extension SearchMeditationViewController: FavouritesViewModelDelegate {
         self.view.stopActivityIndicator()
         self.showAlert(title: ConstantAlertTitle.LuvoAlertTitle, message: statusCode ?? ConstantAlertTitle.ErrorAlertTitle)
     }
+}
+
+extension SearchMeditationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+       // return arrQuotes.count
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCellBanner", for: indexPath) as! SearchCellBanner
+        cell.lbquotes.text = arrQuotes[indexPath.row].quote
+        cell.lblAuthor.text =  arrQuotes[indexPath.row].authorName
+
+
+                     //   let image = UIImage(named:"bannerHome")?.withTintColor(.systemPink, renderingMode: .alwaysTemplate)
+                        cell.imgView.image = UIImage(named:"bannerHome")
+                       
+        let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
+        let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
+        print("chakra level ...--->>>",chakraLevel)
+        print("coloris ...--->>>",chakraColour)
+        let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+                
+                print(crownList)
+
+
+//        for view in viewTopBanner.subviews{
+//            view.removeFromSuperview()
+//        }
+
+         // this gets things done
+       // view.subviews.map({ $0.removeFromSuperview() })
+
+        if chakraColour==0 {
+            switch chakraLevel {
+            case 1:
+
+                cell.imgView1.backgroundColor  = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.35)
+                break
+
+            case 3:
+
+                cell.imgView1.backgroundColor =  #colorLiteral(red: 0.9921568627, green: 0.6980392157, blue: 0, alpha: 0.3001468165)
+
+                break
+            case 4:
+
+                cell.imgView1.backgroundColor = #colorLiteral(red: 0, green: 0.6509803922, blue: 0.1725490196, alpha: 0.3541517447)
+
+                break
+            case 5:
+
+                cell.imgView1.backgroundColor = #colorLiteral(red: 0, green: 0.6784313725, blue: 0.937254902, alpha: 0.75)
+
+                break
+            case 2:
+
+                cell.imgView1.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.4235294118, blue: 0, alpha: 0.35)
+
+                break
+            case 6:
+
+                cell.imgView1.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+
+                break
+            case 7:
+
+                cell.imgView1.backgroundColor  = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+
+                break
+
+            default:
+
+                break
+            }
+        }
+        else if crownList == 1 {
+            switch chakraColour {
+                        
+                    case 1:
+
+                        cell.imgView1.backgroundColor  = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.35)
+                        break
+
+                    case 3:
+
+                        cell.imgView1.backgroundColor =  #colorLiteral(red: 0.9921568627, green: 0.6980392157, blue: 0, alpha: 0.3001468165)
+
+                        break
+                    case 4:
+
+                        cell.imgView1.backgroundColor = #colorLiteral(red: 0, green: 0.6509803922, blue: 0.1725490196, alpha: 0.3541517447)
+
+                        break
+                    case 5:
+
+                        cell.imgView1.backgroundColor = #colorLiteral(red: 0, green: 0.6784313725, blue: 0.937254902, alpha: 0.75)
+
+                        break
+                    case 2:
+
+                        cell.imgView1.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.4235294118, blue: 0, alpha: 0.35)
+
+                        break
+                    case 6:
+
+                        cell.imgView1.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+
+                        break
+                    case 7:
+
+                        cell.imgView1.backgroundColor  = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+
+                        
+            default:
+                break
+            }
+        }
+            else {
+                switch chakraLevel {
+                case 1:
+
+                    cell.imgView1.backgroundColor  = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.35)
+                    break
+
+                case 3:
+
+                    cell.imgView1.backgroundColor =  #colorLiteral(red: 0.9921568627, green: 0.6980392157, blue: 0, alpha: 0.3001468165)
+
+                    break
+                case 4:
+
+                    cell.imgView1.backgroundColor = #colorLiteral(red: 0, green: 0.6509803922, blue: 0.1725490196, alpha: 0.3541517447)
+
+                    break
+                case 5:
+
+                    cell.imgView1.backgroundColor = #colorLiteral(red: 0, green: 0.6784313725, blue: 0.937254902, alpha: 0.75)
+
+                    break
+                case 2:
+
+                    cell.imgView1.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.4235294118, blue: 0, alpha: 0.35)
+
+                    break
+                case 6:
+
+                    cell.imgView1.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+
+                    break
+                case 7:
+
+                    cell.imgView1.backgroundColor  = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+
+                    break
+
+                default:
+
+                    break
+                
+                }
+                
+            }
+                        
+                        return cell
+
+    }
+    
+    
+    
+    
 }

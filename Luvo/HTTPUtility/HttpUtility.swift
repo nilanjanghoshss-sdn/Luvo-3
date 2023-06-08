@@ -32,8 +32,8 @@ struct HttpUtility {
                             let result = try JSONDecoder().decode(T.self, from: responseData!)
                             _ = completionHandler(result, nil)
                         } catch let error {
-                            debugPrint("Error occured while decoding GET - \(error.localizedDescription)")
-                            _ = completionHandler(nil, "Status: \(error.localizedDescription)")
+                            debugPrint("Error occured while decoding GET - \(error)")
+                            _ = completionHandler(nil, "Status: \(error)")
                         }
                     } else if let error = error {
                         debugPrint("HTTP Request Failed \(error)")
@@ -82,7 +82,7 @@ struct HttpUtility {
                     if (data != nil && data?.count != 0) {
                         do {
                             ///dump("API JSON RESPONSE-------\(response)")
-                            data?.printJSON()
+                             data?.printJSON()
                             ///Print data as JSON format
                             ///
                             
@@ -188,7 +188,6 @@ struct HttpUtility {
     }
     
     
-    //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     //MARK: Media Upload with Parameters
     func uploadMediaWithDataMultipartForm<T:Decodable>(requestUrl: URL, httpMethod: String, requestMediaBody: AudioUploadRequest, requestSleepBody: SleepUploadRequest,  formParam: [String: Data]?, token: String?, resultType: T.Type, completionHandler: @escaping(_ result: T? , _ error: String?) -> Void) {
         let mimeTypeAudio = "audio/*"
@@ -218,7 +217,7 @@ struct HttpUtility {
                                      fileType: requestSleepBody.fileType!) else { return }
         
 
-        let dataBody = createDataBody(withParameters: formParam, media: [mediaAudio, sleepFile], boundary: boundary)
+        let dataBody = createDataBody(withParameters: formParam, media: [sleepFile], boundary: boundary)
         
         request.httpBody = dataBody
 
@@ -263,7 +262,6 @@ struct HttpUtility {
             }
         }).resume()
     }
-
     func generateBoundary() -> String {
         return "----------\(UUID().uuidString)"
     }

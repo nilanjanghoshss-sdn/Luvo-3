@@ -37,7 +37,85 @@ class MeditationAudioListCell: UITableViewCell {
         
         //Color setup according to chakra level
         let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
+        let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
+        let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+               
+               print(crownList)
+               print("chakra level ...--->>>",chakraLevel)
+               print("coloris ...--->>>",chakraColour)
+
+        if chakraColour==0 {
+        switch chakraLevel {
+        case 1:
+            imgLockScrren.image = UIImage(named: "lockred")
+            break
+            
+        case 2:
+            imgLockScrren.image = UIImage(named: "lockorange")
+            break
+            
+        case 3:
+            imgLockScrren.image = UIImage(named: "lockyellow")
+            break
+            
+        case 4:
+            imgLockScrren.image = UIImage(named: "lockgreen")
+            break
+        
+        case 5:
+            imgLockScrren.image = UIImage(named: "locksky")
+            break
+            
+        case 6:
+            imgLockScrren.image = UIImage(named: "lockviolet")
+            break
+            
+        case 7:
+            imgLockScrren.image = UIImage(named: "lockpurple")
+            break
+            
+        default:
+            imgLockScrren.image = UIImage(named: "lockred")
+            break
+        }
+        }else if crownList == 1 {
+            switch chakraColour {
                 
+            case 1:
+                imgLockScrren.image = UIImage(named: "lockred")
+                break
+                
+            case 2:
+                imgLockScrren.image = UIImage(named: "lockorange")
+                break
+                
+            case 3:
+                imgLockScrren.image = UIImage(named: "lockyellow")
+                break
+                
+            case 4:
+                imgLockScrren.image = UIImage(named: "lockgreen")
+                break
+            
+            case 5:
+                imgLockScrren.image = UIImage(named: "locksky")
+                break
+                
+            case 6:
+                imgLockScrren.image = UIImage(named: "lockviolet")
+                break
+                
+            case 7:
+                imgLockScrren.image = UIImage(named: "lockpurple")
+                break
+                
+            default:
+                imgLockScrren.image = UIImage(named: "lockred")
+                break
+            }
+            
+    }else
+        {
         switch chakraLevel {
         case 1:
             imgLockScrren.image = UIImage(named: "lockred")
@@ -73,6 +151,7 @@ class MeditationAudioListCell: UITableViewCell {
         }
     }
     
+    }
     //create your closure here
     var btnFavClick : (() -> ()) = {}
     
@@ -163,7 +242,17 @@ class MeditationAudioListViewController: UIViewController {
         if let chakraName = meditationAudioRequest?.chakraName {
             lbl7DayMeditation.text = "7 Day \(chakraName) Meditation"
         } else {
-            lbl7DayMeditation.text = "Meditaion For \(meditationAudioRequest?.VCName ?? "")"
+            //lbl7DayMeditation.text = "Meditation For \(meditationAudioRequest?.VCName ?? "")"
+            
+            let str = "Meditation For \(meditationAudioRequest?.VCName ?? "")"
+            if str == "Meditation For Guided"
+            {
+                lbl7DayMeditation.text = "Guided Meditation"
+            }
+            else
+            {
+            lbl7DayMeditation.text = str
+            }
         }
     }
     

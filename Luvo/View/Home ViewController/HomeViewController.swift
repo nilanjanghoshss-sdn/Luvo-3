@@ -4,6 +4,8 @@
 //
 //  Created by BEASMACUSR02 on 02/09/21.
 //
+
+import FirebaseDatabase
 import StoreKit
 import UIKit
 import FBSDKLoginKit
@@ -23,6 +25,36 @@ class CellLive: UICollectionViewCell {
     @IBOutlet var imgView: UIImageView_Designable!
     @IBOutlet var lblTitle: UILabel!
 }
+
+
+class CellBanner: UICollectionViewCell {
+    @IBOutlet var imgView: UIImageView!
+    @IBOutlet var imgView1: UIImageView!
+    @IBOutlet var lbquotes: UILabel!
+    @IBOutlet var lblAuthor: UILabel!
+}
+
+
+class UpcomingList: UITableViewCell {
+@IBOutlet var imgViewCoach: UIImageView!
+@IBOutlet var imgViewCalender: UIImageView!
+@IBOutlet var lblCoach: UILabel!
+@IBOutlet var lblTime: UILabel!
+@IBOutlet var Sessonname: UILabel!
+@IBOutlet var imgViewLive: UIImageView!
+@IBOutlet var lblCatagory: UILabel!
+    
+    
+    override func layoutSubviews() {
+        
+        self.layer.cornerRadius = 15.0
+       // self.layer.borderWidth = 5.0
+      //  self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.masksToBounds = true
+    }
+    
+    
+    }
 
 
 class CellBlog: UICollectionViewCell {
@@ -62,9 +94,10 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
     @IBOutlet var imgSleep: UIImageView!
     @IBOutlet var imgPoints: UIImageView!
     @IBOutlet var imgGratitude: UIImageView!
+    @IBOutlet var imageViewGif: UIImageView!
     
     //Label
-    @IBOutlet var lblQuotes: UILabel!
+   // @IBOutlet var lblQuotes: UILabel!
     @IBOutlet var lblQuoteAuthor: UILabel!
     @IBOutlet var lblSteps: UILabel!
     @IBOutlet var lblWaterIntake: UILabel!
@@ -81,22 +114,43 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
     @IBOutlet var btnBlogViewAll: UIButton!
     @IBOutlet var btnRecordedsession: UIButton!
     @IBOutlet var btnLivesession: UIButton!
+    @IBOutlet var btnUserRcordedSession: UIButton!
+    @IBOutlet var btnDonateUs: UIButton!
+    @IBOutlet var btnUpcomingSession: UIButton!
+    @IBOutlet var btnHeaderLive: UIButton!
     
     //CollectionView
     @IBOutlet var collBreathExercise: UICollectionView!
     @IBOutlet var collBlog: UICollectionView!
     @IBOutlet var collRec: UICollectionView!
     @IBOutlet var collLive: UICollectionView!
+
+    @IBOutlet var collBanner: UICollectionView!
+
+
     
-        
+    @IBOutlet weak var upComingSession: UITableView!
+    
+    @IBOutlet weak var btnVideoCall: UIButton!
+    
     var chakraDiplayViewModel = ChakraDisplayViewModel()
     var homeViewModel = HomeViewModel()
     var homeData: HomeResponse?
+    var liveJoinViewModelUpcoming = LiveJoinViewModel()
+    var sessionIdUpcoming: String = ""
+    var ref: DatabaseReference!
+    
+    var UpcomingArray2 = [Any]()
     
     private var sideMenu:SideMenuViewController!
     private var drawerTransition:DrawerTransition!
-    
+    var scrollTimer: Timer?
+    var currenCallIndex = 0
     private var heartViewModel = HeartViewModel()
+    
+    var AlreadyActive: Bool = false
+    var Started: Bool = false
+    var string: String = ""
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +166,7 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
 //        setupSideMenu()
 //
 ////        Temporary
-//        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBhbmthaiBuYXJheWFuIFNhcmthciIsIm1vYmlsZSI6Ijk4MDc2NTQzMjEiLCJpYXQiOjE2NDAzMzEwOTMsInN1YiI6IjYxODAzYTU1OTMxZGNiNTVkOTM2N2ViYiJ9.GeVFiMe5pkbC-1-IDfNFIM4Z-4HrhLxtT58W3fT9SVU"
+//        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJF9.eyJ1c2VybmFtZSI6IlBhbmthaiBuYXJheWFuIFNhcmthciIsIm1vYmlsZSI6Ijk4MDc2NTQzMjEiLCJpYXQiOjE2NDAzMzEwOTMsInN1YiI6IjYxODAzYTU1OTMxZGNiNTVkOTM2N2ViYiJ9.GeVFiMe5pkbC-1-IDfNFIM4Z-4HrhLxtT58W3fT9SVU"
 //        UserDefaults.standard.set(token, forKey: ConstantUserDefaultTag.udToken)
 //
 //        let userid = "464694"
@@ -126,7 +180,33 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
 //           if v is UIView{
 //              v.removeFromSuperview()
 //           }
+    
 //        }
+//        print(UserDefaults.standard.bool(forKey: ConstantUserDefaultTag.udFromLive))//
+        UserDefaults.standard.set(false, forKey: "isFromSave")
+        imageViewGif.isHidden = true
+        btnHeaderLive.isHidden = true
+        let status = UserDefaults.standard.bool(forKey: ConstantUserDefaultTag.udFromLive)
+        print(status)
+        if status==true
+        {
+            imageViewGif.isHidden = false
+            btnHeaderLive.isHidden = false
+        }
+        else
+        {
+            imageViewGif.isHidden = true
+            btnHeaderLive.isHidden = true
+        }
+        
+        let jeremyGif = UIImage.gifImageWithName("liveNew")
+        imageViewGif.image = jeremyGif
+        ref = Database.database().reference()
+        self.childObserver()
+        btnDonateUs.isHidden = true
+        ref = Database.database().reference()
+       // upComingSession.reloadData()
+        upComingSession.layer.cornerRadius = 10
         
         heartViewModel.delegateWatchHeartPostData = self
         
@@ -138,9 +218,9 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
         homeViewModel.delegate = self
         homeViewModel.timezoneDelegate = self
         homeViewModel.logoutDelegate = self
-
+        liveJoinViewModelUpcoming.Liveviewdelegate = self
         setupSideMenu()
-        viewTopBanner.setNeedsDisplay()
+      //  viewTopBanner.setNeedsDisplay()
         viewGratitudeBanner.setNeedsDisplay()
         
       //  super.viewWillAppear(animated)
@@ -167,6 +247,34 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
             }
         }
         
+//        scrollTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(sliderNext), userInfo: nil, repeats: true)
+
+        
+    }
+    
+    @objc func sliderNext()
+    {
+        //homeData?.quotesArray?.count
+        debugPrint(homeData?.quotesArray?.count ?? 0)
+        
+        if currenCallIndex < (homeData?.quotesArray?.count ?? 0) - 1
+        {
+            currenCallIndex = currenCallIndex + 1
+        }
+        else{
+            
+            currenCallIndex = 0
+        }
+        
+        if currenCallIndex == 0
+        {
+        collBanner.scrollToItem(at: IndexPath(item: currenCallIndex, section: 0), at: .left, animated: false)
+        }
+        
+        else
+        {
+        collBanner.scrollToItem(at: IndexPath(item: currenCallIndex, section: 0), at: .right, animated: true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -203,6 +311,35 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
         navigationController?.pushViewController(notifyVC, animated: true)
     }
     //-----------------------------
+    @IBAction func btnUpcomingSessionLive(_ sender: Any) {
+        
+        let LiveVC = ConstantStoryboard.LiveSessionList.instantiateViewController(withIdentifier: "LiveSessionListViewController") as! LiveSessionListViewController
+        LiveVC.sessionId = ""
+        LiveVC.CatagoryName = "All Upcoming Sessions"
+        navigationController?.pushViewController(LiveVC, animated: true)
+    }
+    
+    @IBAction func btnUpcomingSession(_ sender: Any) {
+        
+        let LiveVC = ConstantStoryboard.LiveSessionList.instantiateViewController(withIdentifier: "LiveSessionListViewController") as! LiveSessionListViewController
+        LiveVC.sessionId = ""
+        LiveVC.CatagoryName = "All Upcoming Sessions"
+        navigationController?.pushViewController(LiveVC, animated: true)
+        
+        
+//        let refreshAlert = UIAlertController(title: "Luvo", message: "Recording section is coming soon", preferredStyle: UIAlertController.Style.alert)
+//
+//        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+//              print("Handle Ok logic here")
+//
+//        }))
+//
+////        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+////              print("Handle Cancel Logic here")
+////        }))
+//
+//        present(refreshAlert, animated: true, completion: nil)
+    }
     
     @IBAction func btnRecord(_ sender: Any) {
         
@@ -221,6 +358,27 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
         present(refreshAlert, animated: true, completion: nil)
     }
     
+    @IBAction func btnRecordedList(_ sender: Any) {
+        
+        UserDefaults.standard.set(true, forKey: "isFromHomeList")
+        let LiveVC = ConstantStoryboard.RecordedSessionList.instantiateViewController(withIdentifier: "RecordedSessionListVC") as! RecordedSessionListVC
+      //  LiveVC.sessionId = (homeData?.recording?[indexPath.row].ctgryId)!
+      //  LiveVC.sessionName = homeData?.recording?[indexPath.row].categoryName ?? "test"
+        navigationController?.pushViewController(LiveVC, animated: true)
+        
+    }
+    
+    @IBAction func btnDonation(_ sender: Any) {
+
+        UserDefaults.standard.set(true, forKey: "IsfromHome")
+        UserDefaults.standard.set(false, forKey: "IsfromRecord")
+        UserDefaults.standard.set(false, forKey: "IsfromSession")
+              let callVC = ConstantStoryboard.Payment.instantiateViewController(withIdentifier: "PaymentVC") as! PaymentVC
+              self.navigationController?.pushViewController(callVC, animated: false)
+
+
+        
+    }
     @IBAction func btnLive(_ sender: Any) {
         
         
@@ -278,12 +436,21 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
         btnSearch.backgroundColor = UIColor.colorSetup()
         btnBreathViewAll.setTitleColor(UIColor.colorSetup(), for: .normal)
         btnBlogViewAll.setTitleColor(UIColor.colorSetup(), for: .normal)
-        btnRecordedsession.setTitleColor(UIColor.colorSetup(), for: .normal)
-        btnLivesession.setTitleColor(UIColor.colorSetup(), for: .normal)
+       // btnRecordedsession.setTitleColor(UIColor.colorSetup(), for: .normal)
+        btnUpcomingSession.setTitleColor(UIColor.colorSetup(), for: .normal)
+        btnDonateUs.setTitleColor(UIColor.colorSetup(), for: .normal)
+        btnDonateUs.tintColor = UIColor.colorSetup()
+        btnUserRcordedSession.setTitleColor(UIColor.colorSetup(), for: .normal)
+        btnVideoCall.setTitleColor(UIColor.colorSetup(), for: .normal)
+        btnVideoCall.tintColor = UIColor.colorSetup()
+        
         
         //Color setup according to chakra level
         let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
         let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
+        let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+        
+        print(crownList)
         print("chakra level ...--->>>",chakraLevel)
         print("coloris ...--->>>",chakraColour)
         
@@ -340,6 +507,7 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
                 
                 viewTopBanner.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.6980392157, blue: 0, alpha: 0.3001468165)
                 viewGratitudeBanner.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.7019607843, blue: 0.01568627451, alpha: 0.7534304991)
+                
                 
                 imgSteps.image = UIImage.init(named: ConstantThemeHomeIcon.yellow_steps)
                 imgWaterIntake.image = UIImage.init(named: ConstantThemeHomeIcon.yellow_water)
@@ -445,7 +613,7 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
                 
                 break
             }
-        } else {
+        } else if crownList == 1 {
             switch chakraColour {
 
 
@@ -606,6 +774,160 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
                 break
            }
         }
+        else
+        {
+            switch chakraLevel {
+            case 1:
+                
+//                viewTopBanner.setGradientBackground(hexColor: ["#ed000a","#f4696f"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+//                viewGratitudeBanner.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.35)
+                viewGratitudeBanner.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.75)
+                
+                imgSteps.image = UIImage.init(named: ConstantThemeHomeIcon.red_steps)
+                imgWaterIntake.image = UIImage.init(named: ConstantThemeHomeIcon.red_water)
+                imgMood.image = UIImage.init(named: ConstantThemeHomeIcon.red_mood)
+                imgHeartRate.image = UIImage.init(named: ConstantThemeHomeIcon.red_heart)
+                imgSleep.image = UIImage.init(named: ConstantThemeHomeIcon.red_sleep)
+                imgPoints.image = UIImage.init(named: ConstantThemeHomeIcon.red_points)
+                imgGratitude.image = UIImage.init(named: ConstantThemeHomeIcon.red_gratitude)
+                
+                break
+                
+            case 2:
+                
+//                viewTopBanner.setGradientBackground(hexColor: ["#f46d02","#f8a25e"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+//                viewGratitudeBanner.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.4235294118, blue: 0, alpha: 0.35)
+                viewGratitudeBanner.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.4235294118, blue: 0, alpha: 0.75)
+                
+                imgSteps.image = UIImage.init(named: ConstantThemeHomeIcon.orange_steps)
+                imgWaterIntake.image = UIImage.init(named: ConstantThemeHomeIcon.orange_water)
+                imgMood.image = UIImage.init(named: ConstantThemeHomeIcon.orange_mood)
+                imgHeartRate.image = UIImage.init(named: ConstantThemeHomeIcon.orange_heart)
+                imgSleep.image = UIImage.init(named: ConstantThemeHomeIcon.orange_sleep)
+                imgPoints.image = UIImage.init(named: ConstantThemeHomeIcon.orange_points)
+                imgGratitude.image = UIImage.init(named: ConstantThemeHomeIcon.orange_gratitude)
+                
+                break
+                
+            case 3:
+                
+//                viewTopBanner.setGradientBackground(hexColor: ["#fdb201","#fedd8f"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+//                viewGratitudeBanner.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.6980392157, blue: 0, alpha: 0.3001468165)
+                viewGratitudeBanner.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.7019607843, blue: 0.01568627451, alpha: 0.7534304991)
+                
+                
+                imgSteps.image = UIImage.init(named: ConstantThemeHomeIcon.yellow_steps)
+                imgWaterIntake.image = UIImage.init(named: ConstantThemeHomeIcon.yellow_water)
+                imgMood.image = UIImage.init(named: ConstantThemeHomeIcon.yellow_mood)
+                imgHeartRate.image = UIImage.init(named: ConstantThemeHomeIcon.yellow_heart)
+                imgSleep.image = UIImage.init(named: ConstantThemeHomeIcon.yellow_sleep)
+                imgPoints.image = UIImage.init(named: ConstantThemeHomeIcon.yellow_points)
+                imgGratitude.image = UIImage.init(named: ConstantThemeHomeIcon.yellow_gratitude)
+                
+                break
+                
+            case 4:
+                
+//                viewTopBanner.setGradientBackground(hexColor: ["#03a72e","#7fd295"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+//                viewGratitudeBanner.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0, green: 0.6509803922, blue: 0.1725490196, alpha: 0.3541517447)
+                viewGratitudeBanner.backgroundColor = #colorLiteral(red: 0, green: 0.6509803922, blue: 0.1725490196, alpha: 0.75)
+                
+                
+                imgSteps.image = UIImage.init(named: ConstantThemeHomeIcon.green_steps)
+                imgWaterIntake.image = UIImage.init(named: ConstantThemeHomeIcon.green_water)
+                imgMood.image = UIImage.init(named: ConstantThemeHomeIcon.green_mood)
+                imgHeartRate.image = UIImage.init(named: ConstantThemeHomeIcon.green_heart)
+                imgSleep.image = UIImage.init(named: ConstantThemeHomeIcon.green_sleep)
+                imgPoints.image = UIImage.init(named: ConstantThemeHomeIcon.green_points)
+                imgGratitude.image = UIImage.init(named: ConstantThemeHomeIcon.green_gratitude)
+                
+                break
+                
+            case 5:
+                
+//                viewTopBanner.setGradientBackground(hexColor: ["#03aeef","#a2e1f9"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+//                viewGratitudeBanner.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0, green: 0.6784313725, blue: 0.937254902, alpha: 0.75)
+                viewGratitudeBanner.backgroundColor = #colorLiteral(red: 0, green: 0.6784313725, blue: 0.937254902, alpha: 0.75)
+//
+                imgSteps.image = UIImage.init(named: ConstantThemeHomeIcon.sky_steps)
+                imgWaterIntake.image = UIImage.init(named: ConstantThemeHomeIcon.sky_water)
+                imgMood.image = UIImage.init(named: ConstantThemeHomeIcon.sky_mood)
+                imgHeartRate.image = UIImage.init(named: ConstantThemeHomeIcon.sky_heart)
+                imgSleep.image = UIImage.init(named: ConstantThemeHomeIcon.sky_sleep)
+                imgPoints.image = UIImage.init(named: ConstantThemeHomeIcon.sky_points)
+                imgGratitude.image = UIImage.init(named: ConstantThemeHomeIcon.sky_gratitude)
+                
+                break
+            
+            case 6:
+                
+//                viewTopBanner.setGradientBackground(hexColor: ["#612da9","#a487ce"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+//                viewGratitudeBanner.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+                viewGratitudeBanner.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.75)
+                
+                imgSteps.image = UIImage.init(named: ConstantThemeHomeIcon.violet_steps)
+                imgWaterIntake.image = UIImage.init(named: ConstantThemeHomeIcon.violet_water)
+                imgMood.image = UIImage.init(named: ConstantThemeHomeIcon.violet_mood)
+                imgHeartRate.image = UIImage.init(named: ConstantThemeHomeIcon.violet_heart)
+                imgSleep.image = UIImage.init(named: ConstantThemeHomeIcon.violet_sleep)
+                imgPoints.image = UIImage.init(named: ConstantThemeHomeIcon.violet_points)
+                imgGratitude.image = UIImage.init(named: ConstantThemeHomeIcon.violet_gratitude)
+                
+                break
+                
+            case 7:
+                
+//                viewTopBanner.setGradientBackground(hexColor: ["#a81f93","#e9c7e4"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+//                viewGratitudeBanner.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.35)
+                viewGratitudeBanner.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.1490196078, blue: 0.6509803922, alpha: 0.75)
+                
+                imgSteps.image = UIImage.init(named: ConstantThemeHomeIcon.purple_steps)
+                imgWaterIntake.image = UIImage.init(named: ConstantThemeHomeIcon.purple_water)
+                imgMood.image = UIImage.init(named: ConstantThemeHomeIcon.purple_mood)
+                imgHeartRate.image = UIImage.init(named: ConstantThemeHomeIcon.purple_heart)
+                imgSleep.image = UIImage.init(named: ConstantThemeHomeIcon.purple_sleep)
+                imgPoints.image = UIImage.init(named: ConstantThemeHomeIcon.purple_points)
+                imgGratitude.image = UIImage.init(named: ConstantThemeHomeIcon.purple_gratitude)
+                
+                break
+                
+            default:
+                //red
+               
+//                viewTopBanner.setGradientBackground(hexColor: ["#ed000a","#f4696f"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+//                viewGratitudeBanner.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                
+                viewTopBanner.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.35)
+                viewGratitudeBanner.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0, blue: 0.03921568627, alpha: 0.75)
+                
+                
+                
+                imgSteps.image = UIImage.init(named: ConstantThemeHomeIcon.red_steps)
+                imgWaterIntake.image = UIImage.init(named: ConstantThemeHomeIcon.red_water)
+                imgMood.image = UIImage.init(named: ConstantThemeHomeIcon.red_mood)
+                imgHeartRate.image = UIImage.init(named: ConstantThemeHomeIcon.red_heart)
+                imgSleep.image = UIImage.init(named: ConstantThemeHomeIcon.red_sleep)
+                imgPoints.image = UIImage.init(named: ConstantThemeHomeIcon.red_points)
+                imgGratitude.image = UIImage.init(named: ConstantThemeHomeIcon.red_gratitude)
+                
+                break
+            }
+        }
                 
 
     }
@@ -624,6 +946,15 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
         navigationController?.pushViewController(exerVC, animated: true)
     }
     
+    @IBAction func btnVideoCall(_ sender: Any) {
+        
+        let callVC = ConstantStoryboard.Call.instantiateViewController(withIdentifier: "UserCallViewController") as! UserCallViewController
+        self.navigationController?.pushViewController(callVC, animated: true)
+        
+          ///      let callVC = ConstantStoryboard.Payment.instantiateViewController(withIdentifier: "PaymentVC") as! PaymentVC
+          //      self.navigationController?.pushViewController(callVC, animated: false)
+        
+    }
     @IBAction func tapGesWater(_ sender: Any) {
         let waterVC = ConstantStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "WaterIntakeViewController") as! WaterIntakeViewController
         isFromBackWater = false //Bool in WaterIntakeVC
@@ -756,8 +1087,10 @@ class HomeViewController: UIViewController, SideMenuDelegate, UITextFieldDelegat
     
     @IBAction func btnSearch(_ sender: Any) {
         let searchVC = ConstantStoryboard.searchStoryboard.instantiateViewController(withIdentifier: "SearchMeditationViewController") as! SearchMeditationViewController
-        searchVC.messageQuetes = lblQuotes.text!
-        searchVC.authorName = lblQuoteAuthor.text!
+      //  searchVC.messageQuetes = lblQuotes.text!
+      //  searchVC.authorName = lblQuoteAuthor.text!
+        searchVC.arrQuotes =  (homeData?.quotesArray)!
+        
         navigationController?.pushViewController(searchVC, animated: true)
     }
     
@@ -961,6 +1294,23 @@ extension HomeViewController {
                 }
             }
             }
+            else{
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                    self.openAlertWithButtonFunc(title: ConstantAlertTitle.LuvoAlertTitle,
+                                            message: "Listening to all the audios in Chakra meditation will enable you to Retake The Quiz",
+                                            alertStyle: .alert,
+                                            actionTitles: ["OK"],
+                                            actionStyles: [.default],
+                                            actions: [
+                                                {
+                                                    _ in
+                                                    
+                                                    self.navigationController?.popViewController(animated: true)
+                                                }])
+                }
+                
+            }
             break
             
         case 11:
@@ -1104,7 +1454,7 @@ extension HomeViewController: TimezoneDelegate {
                 let data = try JSONDecoder().decode(LoginUserDetails.self, from: userData as! Data)
                 
                 let currentTimeZone = Date().GMToffsetInHours()
-                print("Current Timezone---\(currentTimeZone)")
+                print("Current Timezone--->\(currentTimeZone)")
                 
                 if let timezone = data.timeZone {
                     if timezone.count == 0 || timezone == "0:00" {

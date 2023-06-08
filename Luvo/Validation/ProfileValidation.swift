@@ -13,7 +13,7 @@ struct ProfileValidation {
             return ValidationResult(success: false, error: ConstantTextfieldAlertTitle.userNameIsEmpty)
         }
         if (profileRequest.mobileNo!.isEmpty) {
-            return ValidationResult(success: false, error: ConstantTextfieldAlertTitle.userPhoneIsEmpty)
+           // return ValidationResult(success: false, error: ConstantTextfieldAlertTitle.userPhoneIsEmpty)
         }
         return ValidationResult(success: true, error: nil)
     }

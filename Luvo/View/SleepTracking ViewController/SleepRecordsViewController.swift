@@ -207,15 +207,15 @@ class SleepRecordsViewController: UIViewController {
         //
         self.viewDurationBottom.backgroundColor = UIColor.colorSetup()
         
-        self.imgAudioLogo.tintColor = UIColor.colorSetup()
+      //  self.imgAudioLogo.tintColor = UIColor.colorSetup()
         
         //Audio Player
-        self.viewAudioPlayer.layer.cornerRadius = 10.0
-        self.viewAudioPlayer.layer.borderWidth = 2
-        self.viewAudioPlayer.layer.borderColor = UIColor.colorSetup().cgColor
-        self.lblAudioTitle.textColor = UIColor.colorSetup()
-        self.btnPlay.tintColor = UIColor.colorSetup()
-        self.loadingView.isHidden = true
+     //   self.viewAudioPlayer.layer.cornerRadius = 10.0
+    //    self.viewAudioPlayer.layer.borderWidth = 2
+    //    self.viewAudioPlayer.layer.borderColor = UIColor.colorSetup().cgColor
+    //    self.lblAudioTitle.textColor = UIColor.colorSetup()
+     //   self.btnPlay.tintColor = UIColor.colorSetup()
+     //   self.loadingView.isHidden = true
         ///Audio Slider Disable
 //        playbackSlider.isUserInteractionEnabled = false
 //        playbackSlider.tintColor = UIColor.colorSetup()
@@ -492,7 +492,8 @@ class SleepRecordsViewController: UIViewController {
             }
             
             //, device_cat: "watch"
-            let requestt = SleepStatRequest(startDate: startDate, endDate: endDate, device_cat: "watch")
+           // let requestt = SleepStatRequest(startDate: startDate, endDate: endDate)
+            let requestt = SleepStatRequest(startDate: startDate, endDate: endDate, device_cat: "mobile")
             self.view.startActivityIndicator(title: ConstantActivityIndicatorMessage.pkLoading, color: .white)
             sleepVM.postGetSleepStat(sleepStatRequest: requestt, token: token)
         }
@@ -567,7 +568,7 @@ class SleepRecordsViewController: UIViewController {
         
         ///Audio Player-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=
         guard let audioPath = statData?.music_file else {
-            self.lblAudioTitle.text = nil
+       //     self.lblAudioTitle.text = nil
 //            self.loadingView.isHidden = true
             //Audio Player
             if let player = player {
@@ -579,10 +580,13 @@ class SleepRecordsViewController: UIViewController {
             return
         }
         self.setupPlayer(withMediaPath: audioPath)
-        self.lblAudioTitle.text = String(format: "Recorded on %@", SleepDateFormatter(date: sleepAt))
+       // self.lblAudioTitle.text = String(format: "Recorded on %@", SleepDateFormatter(date: sleepAt))
+       // Luvo will access your microphone to record ambient noise during sleep tracking.
     }
     
     private func dateTimeToTime(_ time: String) -> String {
+        
+        
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
@@ -591,6 +595,29 @@ class SleepRecordsViewController: UIViewController {
         dateFormatter.dateFormat = "hh:mm aa"
         guard let stringDate = dateFromString else { return ""}
         return dateFormatter.string(from: stringDate)
+        
+////        let dateFormatter = DateFormatter()
+////        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+////        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+////       // dateFormatter.timeZone = TimeZone.current
+////
+////        let dateFromString = dateFormatter.date(from: time)
+////        dateFormatter.timeZone = TimeZone.current
+////        dateFormatter.dateFormat = "hh:mm aa"
+////        guard let stringDate = dateFromString else { return ""}
+////        return dateFormatter.string(from: stringDate)
+//
+//        let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "H:mm:ss"
+//            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//
+//            if let date = dateFormatter.date(from: time) {
+//                dateFormatter.timeZone = TimeZone.current
+//                dateFormatter.dateFormat = "h:mm a"
+//
+//                return dateFormatter.string(from: date)
+//          //  }
+//            //return nil
     }
     
     private func SleepDateFormatter(date: String) -> String {

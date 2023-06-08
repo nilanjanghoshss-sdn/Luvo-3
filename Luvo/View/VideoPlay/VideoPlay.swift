@@ -22,10 +22,32 @@ class VideoPlay: UIViewController, FavouritesViewModelDelegate {
     @IBOutlet var viewNotificationCount: UIView_Designable!
     @IBOutlet var lblNotificationLabel: UILabel!
     
+    @IBOutlet weak var coachImgVw: UIImageView!
+    @IBOutlet weak var SessionNameNew: UILabel!
+    @IBOutlet weak var ImagVwheart: UIImageView!
+    @IBOutlet weak var btnDonate: UIButton!
+    @IBOutlet weak var lblDonate: UILabel!
+    @IBOutlet weak var ImgVwDonate: UIImageView!
+    @IBOutlet weak var coachName: UILabel!
+    @IBOutlet weak var imgVwCal: UIImageView!
+    @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblDuration: UILabel!
+    @IBOutlet weak var lblSessionDescription: UILabel!
+    @IBOutlet weak var imgVwIcon: UIImageView!
     //AVPlayer
     var healthStore = HKHealthStore()
     var player:AVPlayer?
     var timeObserver: Any?
+    var RecordedUrl: String = ""
+    var SessionName: String = ""
+    var CoachName: String = ""
+    var Description: String = ""
+    var NoofUsers: String = ""
+    var Durstion: String = ""
+    var coachImage: String = ""
+    var dateE: String = ""
+    var isPayMent: String = ""
+
     fileprivate let seekDuration: Float64 = 10
     
     @IBOutlet var viewVideoPlayer: UIView!
@@ -66,18 +88,143 @@ class VideoPlay: UIViewController, FavouritesViewModelDelegate {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
+
+        debugPrint(SessionNameNew)
+        debugPrint(Durstion)
+        debugPrint(NoofUsers)
+        debugPrint(CoachName)
+        debugPrint(isPayMent)
         
         let staturSettings = UserDefaults.standard.bool(forKey:"FromSettings")
         print(staturSettings)
         if staturSettings == true
         {
+            let status = UserDefaults.standard.bool(forKey: "isFromRecordedSession")
+                            print(status)
+                if status == true
+            {
+            
             btnBack.isHidden=false
             btnSkip.isHidden=true
+            self.view.backgroundColor = .white
+                    
+                    let status = UserDefaults.standard.bool(forKey: "isFromCoachRecordedSession")
+                                    print(status)
+                        if status == true
+                    {
+
+                            print(Durstion)
+
+                            coachImgVw.isHidden=false
+                            SessionNameNew.isHidden=false
+                            ImagVwheart.isHidden=true
+                            btnDonate.isHidden=true
+                            lblDonate.isHidden=true
+                             ImgVwDonate.isHidden=true
+                             coachName.isHidden=false
+                             imgVwCal.isHidden=false
+                             lblDate.isHidden=false
+                             lblDuration.isHidden=false
+                             imgVwIcon.isHidden=false
+                            lblSessionDescription.isHidden=false
+                            
+                            lblDate.text = dateE
+                           lblDuration.text = Durstion
+                            coachName.text = CoachName
+                            SessionNameNew.text = SessionName
+                            lblSessionDescription.text = Description
+//                            lblSessionDescription.text = "Gratitude meditation is a mindfulness practice that involves focusing your attention on the things you feel grateful for in your life"
+                            ImgVwDonate.layer.cornerRadius = 10
+                            coachImgVw.layer.cornerRadius = coachImgVw.bounds.width / 2
+                            coachImgVw.clipsToBounds = true
+                            coachImgVw.sd_setImage(with: URL(string: coachImage), placeholderImage: UIImage(named: ConstantImageSet.placeholder), options: .refreshCached, context: nil)
+                    }
+                    
+                    else
+                    {
+                        print(Durstion)
+
+                        coachImgVw.isHidden=false
+                        SessionNameNew.isHidden=false
+                        if isPayMent == "false"
+                        {
+                            ImagVwheart.isHidden=true
+                            btnDonate.isHidden=true
+                            lblDonate.isHidden=true
+                            ImgVwDonate.isHidden=true
+                        }
+                        else
+                        {
+                            ImagVwheart.isHidden=false
+                            btnDonate.isHidden=false
+                            lblDonate.isHidden=false
+                            ImgVwDonate.isHidden=false
+                        }
+                        
+                         coachName.isHidden=false
+                         imgVwCal.isHidden=false
+                         lblDate.isHidden=false
+                         lblDuration.isHidden=false
+                         imgVwIcon.isHidden=false
+                        lblSessionDescription.isHidden=false
+                        // coachImgVw.img
+                         lblDate.text = dateE
+                         lblDuration.text = Durstion
+                         coachName.text = CoachName
+                         SessionNameNew.text = SessionName
+                        lblSessionDescription.text = Description
+//                        lblSessionDescription.text = "Gratitude meditation is a mindfulness practice that involves focusing your attention on the things you feel grateful for in your life"
+                         ImgVwDonate.layer.cornerRadius = 10
+                         coachImgVw.layer.cornerRadius = coachImgVw.bounds.width / 2
+                         coachImgVw.clipsToBounds = true
+                         coachImgVw.sd_setImage(with: URL(string: coachImage), placeholderImage: UIImage(named: ConstantImageSet.placeholder), options: .refreshCached, context: nil)
+                    }
+                    
+                   
+                    
+                   
+            }
+            
+            else{
+                
+                btnBack.isHidden=false
+                btnSkip.isHidden=true
+               // self.view.backgroundColor = .black
+                coachImgVw.isHidden=true
+                SessionNameNew.isHidden=true
+                ImagVwheart.isHidden=true
+                btnDonate.isHidden=true
+                lblDonate.isHidden=true
+                 ImgVwDonate.isHidden=true
+                 coachName.isHidden=true
+                 imgVwCal.isHidden=true
+                 lblDate.isHidden=true
+                 lblDuration.isHidden=true
+                 imgVwIcon.isHidden=true
+                lblSessionDescription.isHidden=true
+                        
+                      
+            }
         }
         else
         {
             btnBack.isHidden=true
             btnSkip.isHidden=false
+            
+            coachImgVw.isHidden=true
+            SessionNameNew.isHidden=true
+            ImagVwheart.isHidden=true
+            btnDonate.isHidden=true
+            lblDonate.isHidden=true
+             ImgVwDonate.isHidden=true
+             coachName.isHidden=true
+             imgVwCal.isHidden=true
+             lblDate.isHidden=true
+             lblDuration.isHidden=true
+             imgVwIcon.isHidden=true
+            lblSessionDescription.isHidden=true
+            
+           
         }
         
        
@@ -94,8 +241,21 @@ class VideoPlay: UIViewController, FavouritesViewModelDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        let status = UserDefaults.standard.bool(forKey: "IsfromDonation")
+                                print(status)
+
+        if status==true
+        {
+            UserDefaults.standard.set(false, forKey: "IsfromDonation")
+            player?.play()
+        }
+
+        else
+        {
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.setupVideoPlayer()
+        }
         }
     }
 
@@ -124,11 +284,26 @@ class VideoPlay: UIViewController, FavouritesViewModelDelegate {
         navigationController?.setNavigationBarHidden(true, animated: true)
         viewCustomNavBar.roundCornersBottomLeftRight(radius: 15)
     }
+
+    @IBAction func btnDonation(_ sender: Any) {
+        player?.pause()
+        UserDefaults.standard.set(false, forKey: "IsfromHome")
+        UserDefaults.standard.set(true, forKey: "IsfromRecord")
+        UserDefaults.standard.set(false, forKey: "IsfromSession")
+              let callVC = ConstantStoryboard.Payment.instantiateViewController(withIdentifier: "PaymentVC") as! PaymentVC
+              self.navigationController?.pushViewController(callVC, animated: false)
+
+
+
+    }
     
     @IBAction func btnBack(_ sender: Any) {
  //       updateTimeTrack()
-        
+        self.view.startActivityIndicator(title: ConstantActivityIndicatorMessage.pkLoading, color: .white)
+        UserDefaults.standard.set(false, forKey: "isFromRecordedSession")
+
         player?.replaceCurrentItem(with: nil)
+        self.view.stopActivityIndicator()
         navigationController?.popViewController(animated: false)
     }
     
@@ -266,7 +441,21 @@ extension VideoPlay {
         
      //   guard let videoUrl = soothingVideoData?.musicLocation else { return }
         
-               let videoUrl = "https://luvo.s3.us-east-2.amazonaws.com/uploads/luvo-video.mp4"
+        var videoUrl = String ()
+        debugPrint(RecordedUrl)
+        
+        let status = UserDefaults.standard.bool(forKey: "isFromRecordedSession")
+                        print(status)
+                        
+        if status==true
+        {
+            videoUrl = RecordedUrl
+        }
+        else
+        {
+              // let videoUrl = "https://luvo.s3.us-east-2.amazonaws.com/uploads/luvo-video.mp4"
+        videoUrl = "https://luvo.s3.us-east-2.amazonaws.com/uploads/luvo-video.mp4"
+        }
         
         guard let urlString = videoUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         print("VIDEO DATA------\(urlString)")
@@ -404,6 +593,17 @@ extension VideoPlay {
 //            let baseTabVC = ConstantStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "BaseTabBarViewController") as! BaseTabBarViewController
 //            self.navigationController?.pushViewController(baseTabVC, animated: true)
             
+            let status = UserDefaults.standard.bool(forKey: "isFromRecordedSession")
+                            print(status)
+                            
+            if status==true
+            {
+                
+            }
+            
+            else
+            {
+            
             let refreshAlert = UIAlertController(title: "Luvo", message: "Do you want to measure your regular activities through", preferredStyle: UIAlertController.Style.alert)
 
             refreshAlert.addAction(UIAlertAction(title: "iPhone", style: .default, handler: { (action: UIAlertAction!) in
@@ -427,6 +627,7 @@ extension VideoPlay {
 
             self.present(refreshAlert, animated: true, completion: nil)
          }
+        }
     }
 }
 

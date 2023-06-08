@@ -37,6 +37,18 @@ struct ConstantStoryboard {
     static let videoPlay                    = UIStoryboard.init(name: "VideoPlay", bundle: nil)
     static let Coach                        = UIStoryboard.init(name: "coach", bundle: nil)
     static let CoachSideMenu                = UIStoryboard.init(name: "CoachSideViewController", bundle: nil)
+    static let Meditation                   = UIStoryboard.init(name: "Meditation", bundle: nil)
+    static let LiveSessionList              = UIStoryboard.init(name: "LiveSessionList", bundle: nil)
+    static let RecordedSessionList          = UIStoryboard.init(name: "RecordedSessionList", bundle: nil)
+    static let chatUser                     = UIStoryboard.init(name: "chatUser", bundle: nil)
+    static let Call                         = UIStoryboard.init(name: "Call", bundle: nil)
+    static let CoachRecoredeSessionlist     = UIStoryboard.init(name: "coachRecordedSessionList", bundle: nil)
+    static let Payment                       = UIStoryboard.init(name: "Payment", bundle: nil)
+   
+    
+    //static let Meditation
+   
+//CoachViewController
 }
 
 struct ConstantChakraID {
@@ -48,13 +60,16 @@ struct ConstantChakraName {
 
 struct ConstantMeditationID {       //  "static medition Id:
     static let blockedChakras  = "849381"  //  ==> Meditation for blacked chakras
-    static let manifestation   = "197740"  //  ==> Meditation for Manifestation
-    static let highPerformance = "840617"  //  ==> Meditation for high performance"
+    static let guidedMeditation = "702340" ////  ==> Meditation for guided meditation
+    static let manifestation   = "197740"//  ==> Meditation for Manifestation
+    static let highPerformance = "840617"//  ==> Meditation for high performance"
 }
 struct ConstantMeditationStaticName {
     static let blocked          = "Blocked"
+    static let guided           = "Guided"
     static let manifestation    = "Manifestation"
     static let performance      = "High Performance"
+    
 }
 struct ConstantBreathExerciseID {       //  "Static breathing Exercise id
 //    static let boxBreathing    = "535045"      //  ==> Box Breathing
@@ -88,7 +103,7 @@ struct ConstantAlertMessage {
     static let FromDateEmpty            = "Select from date"
     static let NoDataFound              = "No data found"
     static let EnterGratitude           = "Type in your gratitude for today"
-    static let GratitudeBlank           = "No previous day gratitude given"
+    static let GratitudeBlank           = "Gratitude Not Found"
     static let UnlockMusic              = "You have successfully unlocked audio for next day"
     static let HeartRateDetectionMsg    = "Keep your index finger over the rear camera for your pulse detection"
     static let WaterIntakeAddMsg        = "You can only add water intake on current date"
@@ -182,6 +197,8 @@ struct ConstantUserDefaultTag {
     static let udRememberMe                 = "UD_RememberMe"
     static let udToken                      = "UD_Token"
     static let udUserId                     = "UD_UserId"
+    static let udUserName                   = "UD_UserName"
+    static let udUserEmail                   = "UD_UserEmail"
     static let udUserDetails                = "UD_UserDetails"
     static let udSocialLoginBool            = "UD_SocialLoginBool"
     static let udQuestions                  = "UD_Questions"
@@ -204,6 +221,8 @@ struct ConstantUserDefaultTag {
     static let udFromsideMenu               = "UD_Fromsidemenu"
     static let udFromTableviewSelected      = "UD_Tableviewselected"
     static let udFromBackGround             = "udFromBackGround"
+    static let udFromCoachVC                = "UD_From_Coach_VC"
+    static let udFromLive                   = "UD_FromLive"
 }
 
 struct ConstantActivityIndicatorMessage {

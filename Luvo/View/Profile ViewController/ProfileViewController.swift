@@ -145,7 +145,10 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
         
         let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
         print("coloris ...--->>>",chakraColour)
-        
+        let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+                
+                print(crownList)
+
         
         if chakraColour==0 {
             switch chakraLevel{
@@ -277,8 +280,139 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
             
             break
         }
-        } else {
+        } else if crownList == 1 {
             switch chakraColour{
+        case 1:
+            //red
+            viewTopBack.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+            viewChakraLevel.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewPoints.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            
+            btnCamera.setImage(UIImage.init(named: "red_profile_camera"), for: .normal)
+            
+//            imgVFirstName.image = UIImage.init(named: "red_profile_person")
+//            imgVLastName.image = UIImage.init(named: "red_profile_person")
+//            imgVEmail.image = UIImage.init(named: "red_profile_mail")
+//            imgVPhone.image = UIImage.init(named: "red_profile_phone")
+            
+            break
+            
+        case 2:
+            //orange
+            viewTopBack.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+            viewChakraLevel.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewPoints.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewAcheivment.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            
+            btnCamera.setImage(UIImage.init(named: "orange_profile_camera"), for: .normal)
+            
+//            imgVFirstName.image = UIImage.init(named: "orange_profile_person")
+//            imgVLastName.image = UIImage.init(named: "orange_profile_person")
+//            imgVEmail.image = UIImage.init(named: "orange_profile_mail")
+//            imgVPhone.image = UIImage.init(named: "orange_profile_phone")
+            
+            break
+            
+        case 3:
+            //yellow
+            viewTopBack.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+            viewChakraLevel.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewPoints.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewAcheivment.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            
+            btnCamera.setImage(UIImage.init(named: "yellow_profile_camera"), for: .normal)
+            
+//            imgVFirstName.image = UIImage.init(named: "yellow_profile_person")
+//            imgVLastName.image = UIImage.init(named: "yellow_profile_person")
+//            imgVEmail.image = UIImage.init(named: "yellow_profile_mail")
+//            imgVPhone.image = UIImage.init(named: "yellow_profile_phone")
+            
+            break
+            
+        case 4:
+            //green
+            viewTopBack.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+            viewChakraLevel.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewPoints.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewAcheivment.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            
+            btnCamera.setImage(UIImage.init(named: "green_profile_camera"), for: .normal)
+            
+//            imgVFirstName.image = UIImage.init(named: "green_profile_person")
+//            imgVLastName.image = UIImage.init(named: "green_profile_person")
+//            imgVEmail.image = UIImage.init(named: "green_profile_mail")
+//            imgVPhone.image = UIImage.init(named: "green_profile_phone")
+            
+            break
+            
+        case 5:
+            //blue
+            viewTopBack.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+            viewChakraLevel.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewPoints.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewAcheivment.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            
+            btnCamera.setImage(UIImage.init(named: "blue_profile_camera"), for: .normal)
+            
+//            imgVFirstName.image = UIImage.init(named: "blue_profile_person")
+//            imgVLastName.image = UIImage.init(named: "blue_profile_person")
+//            imgVEmail.image = UIImage.init(named: "blue_profile_mail")
+//            imgVPhone.image = UIImage.init(named: "blue_profile_phone")
+            
+            break
+        
+        case 6:
+            //violet
+            viewTopBack.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+            viewChakraLevel.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewPoints.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewAcheivment.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            
+            btnCamera.setImage(UIImage.init(named: "violet_profile_camera"), for: .normal)
+            
+//            imgVFirstName.image = UIImage.init(named: "violet_profile_person")
+//            imgVLastName.image = UIImage.init(named: "violet_profile_person")
+//            imgVEmail.image = UIImage.init(named: "violet_profile_mail")
+//            imgVPhone.image = UIImage.init(named: "violet_profile_phone")
+            
+            break
+            
+        case 7:
+            //purple
+            viewTopBack.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+            viewChakraLevel.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewPoints.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewAcheivment.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            
+            btnCamera.setImage(UIImage.init(named: "purple_profile_camera"), for: .normal)
+            
+//            imgVFirstName.image = UIImage.init(named: "purple_profile_person")
+//            imgVLastName.image = UIImage.init(named: "purple_profile_person")
+//            imgVEmail.image = UIImage.init(named: "purple_profile_mail")
+//            imgVPhone.image = UIImage.init(named: "purple_profile_phone")
+            
+            break
+            
+        default:
+            //red
+            viewTopBack.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+            viewChakraLevel.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewPoints.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+            
+            btnCamera.setImage(UIImage.init(named: "red_profile_camera"), for: .normal)
+            
+//            imgVFirstName.image = UIImage.init(named: "red_profile_person")
+//            imgVLastName.image = UIImage.init(named: "red_profile_person")
+//            imgVEmail.image = UIImage.init(named: "red_profile_mail")
+//            imgVPhone.image = UIImage.init(named: "red_profile_phone")
+            
+            break
+        }
+        }else
+        {
+            switch chakraLevel{
         case 1:
             //red
             viewTopBack.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
@@ -520,7 +654,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
                             if let phoneNo = txtPhone.text {
                                 if firstName.count > 0 && firstName != "" {
                                     if lastName.count > 0 && lastName != "" {
-                                        if phoneNo.count < 10 {
+                                        if phoneNo.count == 1 || phoneNo.count == 2 || phoneNo.count == 3 || phoneNo.count == 4 || phoneNo.count == 5 || phoneNo.count == 6 || phoneNo.count == 7 || phoneNo.count == 8 || phoneNo.count == 9{
                                             self.showAlert(title: ConstantAlertTitle.LuvoAlertTitle, message: ConstantTextfieldAlertTitle.phoneValidation)
                                         } else {
                                             var username: String

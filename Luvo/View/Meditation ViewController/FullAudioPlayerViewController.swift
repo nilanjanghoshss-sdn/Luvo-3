@@ -14,6 +14,7 @@ fileprivate struct ConstantHeaderTitle {
     static let titleForBlocked          = "Meditation - Audio"
     static let titleForManifestation    = "Meditation for Manifestation- Audio"
     static let titleForHighPerformance  = "High performance - Audio"
+    static let titleForGuidedMeditation  = "Guided Meditation - Audio"
 }
 
 class FullAudioPlayerViewController: UIViewController {
@@ -72,7 +73,7 @@ class FullAudioPlayerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
         //Setup navbar
         setupCustomNavBar()
         
@@ -228,11 +229,30 @@ class FullAudioPlayerViewController: UIViewController {
                 lblTitle.text = ""
                 lblDesc.text = "Igniting your enthusiasm through our meditation will release the champion, leader, artist and a performer within. The key ingredient is your \"why\". Let us connect you with your deepest reason for being, then prepare to enter the \"zone\", your true state of flow."
                 break
+            case ConstantMeditationStaticName.guided:
+                lblHeaderTitle.text = ConstantHeaderTitle.titleForGuidedMeditation
+                
+                //imgBackground.image = UIImage(named: "performanceBackground")
+                imgCircle.image = UIImage(named:"performanceCircle")
+                
+                lblTitle.font = UIFont(name: "Nunito-Regular", size: 12.0)
+                lblDesc.font = UIFont(name: "Nunito-Regular", size: 12.0)
+                
+                lblTitle.text = "Find a quiet place, free from any distractions."
+                lblDesc.text = "Choose a comfortable position, either sitting or lying down. Keep your back straight, do not lean backward or forward. When done, close your eyes and relax to soothing music."
+                break
             default:
                 break
             }
         }
         let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
+        let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
+               let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+               
+               print(crownList)
+               print("chakra level ...--->>>",chakraLevel)
+               print("coloris ...--->>>",chakraColour)
+
         imgBackground.image = UIImage(named: "chakra_bg\(chakraLevel)")
         viewCompleted.layer.backgroundColor = UIColor.colorSetup().cgColor
         viewCompleted.isHidden = true   //Completed will always be hidden - Client's call
@@ -481,7 +501,7 @@ extension FullAudioPlayerViewController {
                         if self.boolCompleted == false {
                             //Completed listening to the audio for 5 min (5 x 60sec = 300sec)
                             //debugPrint(Int(time))
-                            if time > 300 && time < 306 {
+                            if time > 1 && time < 2 {
                                 self.boolCompleted = true
                                 self.postCompletedListen5min()
                             }

@@ -97,6 +97,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             //Remember me check and navigate accordingly
                             let boolrememberMe = UserDefaults.standard.bool(forKey: ConstantUserDefaultTag.udRememberMe)
                             let boolQuestionCompleted = UserDefaults.standard.bool(forKey: ConstantUserDefaultTag.udQuestions)
+                            let boolCoachVC = UserDefaults.standard.bool(forKey: ConstantUserDefaultTag.udFromCoachVC)
                             if boolrememberMe == true {
                                 if boolQuestionCompleted == true {
                                     
@@ -109,10 +110,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                     rootNC.isNavigationBarHidden = true
                                     self.window?.rootViewController = rootNC
                                 } else {
+                                    if boolCoachVC == true
+                                    {
+                                        
+                                        debugPrint("Hello")
+                                        let initialViewController = ConstantStoryboard.Coach.instantiateViewController(withIdentifier: "CoachViewController") as! CoachViewController
+                                        let rootNC = UINavigationController(rootViewController: initialViewController)
+                                        rootNC.isNavigationBarHidden = true
+                                        self.window?.rootViewController = rootNC
+                                        
+                                    }
+                                    else
+                                    {
                                     let initialViewController = ConstantStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
                                     let rootNC = UINavigationController(rootViewController: initialViewController)
                                     rootNC.isNavigationBarHidden = true
                                     self.window?.rootViewController = rootNC
+                                    }
                                 }
                             } else if boolrememberMe == false {
                                     let initialViewController = ConstantStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController

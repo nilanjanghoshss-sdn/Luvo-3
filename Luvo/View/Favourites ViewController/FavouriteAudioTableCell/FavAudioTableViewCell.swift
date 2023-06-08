@@ -35,7 +35,13 @@ class FavAudioTableViewCell: UITableViewCell {
         
         //Color setup according to chakra level
         let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
-                
+        let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
+               let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+               
+               print(crownList)
+               print("chakra level ...--->>>",chakraLevel)
+               print("coloris ...--->>>",chakraColour)
+        if chakraColour==0{
         switch chakraLevel {
         case 1:
             imgLockScrren.image = UIImage(named: "lockred")
@@ -68,6 +74,78 @@ class FavAudioTableViewCell: UITableViewCell {
         default:
             imgLockScrren.image = UIImage(named: "lockred")
             break
+        }
+        }else if crownList == 1
+        {
+            switch chakraColour {
+            case 1:
+                imgLockScrren.image = UIImage(named: "lockred")
+                break
+                
+            case 2:
+                imgLockScrren.image = UIImage(named: "lockorange")
+                break
+                
+            case 3:
+                imgLockScrren.image = UIImage(named: "lockyellow")
+                break
+                
+            case 4:
+                imgLockScrren.image = UIImage(named: "lockgreen")
+                break
+            
+            case 5:
+                imgLockScrren.image = UIImage(named: "locksky")
+                break
+                
+            case 6:
+                imgLockScrren.image = UIImage(named: "lockviolet")
+                break
+                
+            case 7:
+                imgLockScrren.image = UIImage(named: "lockpurple")
+                break
+                
+            default:
+                imgLockScrren.image = UIImage(named: "lockred")
+                break
+            }
+        }
+        else
+        {
+            switch chakraLevel {
+            case 1:
+                imgLockScrren.image = UIImage(named: "lockred")
+                break
+                
+            case 2:
+                imgLockScrren.image = UIImage(named: "lockorange")
+                break
+                
+            case 3:
+                imgLockScrren.image = UIImage(named: "lockyellow")
+                break
+                
+            case 4:
+                imgLockScrren.image = UIImage(named: "lockgreen")
+                break
+            
+            case 5:
+                imgLockScrren.image = UIImage(named: "locksky")
+                break
+                
+            case 6:
+                imgLockScrren.image = UIImage(named: "lockviolet")
+                break
+                
+            case 7:
+                imgLockScrren.image = UIImage(named: "lockpurple")
+                break
+                
+            default:
+                imgLockScrren.image = UIImage(named: "lockred")
+                break
+            }
         }
     }
     

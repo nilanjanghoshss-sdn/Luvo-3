@@ -18,7 +18,7 @@ struct SleepStatResponse: Decodable {
 }
 
 struct SleepReport: Decodable {
-    let userId: Int?
+    let userId: String?
     let Date: String?
     let Sleep_At: String?
     let Wake_At: String?

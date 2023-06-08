@@ -41,7 +41,10 @@ struct SleepViewModel {
     var sleepWatchStatDelegate: SleepWatchStatDelegate?
     
     //MARK: - Upload Profile Image
-    func uploadSleepData(mediaData: AudioUploadRequest, sleepData: SleepUploadRequest, formParam: [String: Data], token: String) {
+   // func uploadSleepData(mediaData: AudioUploadRequest, sleepData: SleepUploadRequest, formParam: [String: Data], token: String) {
+        func uploadSleepData(mediaData: AudioUploadRequest, sleepData: SleepUploadRequest, formParam: [String: Data], token: String) {
+        
+  //      func uploadSleepData(sleepData: SleepUploadRequest, formParam: [String: Data], token: String) {
         let url = URL(string: Common.WebserviceAPI.addSleepAPI)!
         let httpUtility = HttpUtility()
         httpUtility.uploadMediaWithDataMultipartForm(requestUrl: url, httpMethod: ConstantHttpMethod.POST, requestMediaBody: mediaData, requestSleepBody: sleepData, formParam: formParam, token: token, resultType: SleepResponse.self) { result, error in

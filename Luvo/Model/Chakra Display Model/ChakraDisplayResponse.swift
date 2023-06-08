@@ -18,6 +18,7 @@ struct ChakraDisplayResponse: Decodable {
     let default_exercise: ChakraDefaultExercise?
     let chakra_color: Int?
     let crownListen: Int?
+    var isLive: Bool?
     
     enum CodingKeys: String, CodingKey {
         case status
@@ -30,6 +31,7 @@ struct ChakraDisplayResponse: Decodable {
         case default_exercise
         case chakra_color
         case crownListen
+        case isLive
         
     }
 }

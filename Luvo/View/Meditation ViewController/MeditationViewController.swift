@@ -90,8 +90,10 @@ class MeditationViewController: UIViewController {
     
     func setupData() {
         arrayMeditationList.append(MeditationModel(image: "meditate", title: "Meditation for blocked chakras", isViewBackgroundColor: false, meditationId: ConstantMeditationID.blockedChakras))
+        arrayMeditationList.append(MeditationModel(image: "performance", title: "Guided Meditation", isViewBackgroundColor: false, meditationId: ConstantMeditationID.guidedMeditation))
         arrayMeditationList.append(MeditationModel(image: "loudspeaker", title: "Meditation for Manifestation", isViewBackgroundColor: false, meditationId: ConstantMeditationID.manifestation))
         arrayMeditationList.append(MeditationModel(image: "performance", title: "Meditation for high performance", isViewBackgroundColor: false, meditationId: ConstantMeditationID.highPerformance))
+       
         arrayMeditationList.append(MeditationModel(image: "music", title: "Soothing music videos", isViewBackgroundColor: false, meditationId: nil))
         arrayMeditationList.append(MeditationModel(image: "Group 9133", title: "Points", isViewBackgroundColor: false, meditationId: nil))
         
@@ -316,7 +318,7 @@ extension MeditationViewController: UITableViewDelegate, UITableViewDataSource {
             exerciseLevelVC.meditationAudioRequestData = MeditationAudioRequest(meditationId: meditationData.meditationId, chakraId: "", exerciseId: defaultExerciseID as? String, exerciseName: defaultExerciseName as? String, time: nil, VCName: ConstantMeditationStaticName.blocked)
             navigationController?.pushViewController(exerciseLevelVC, animated: true)
             break
-        case 1:
+        case 2:
 //            selectedIndex = indexPath
 //            showPopup()
             UserDefaults.standard.set(true, forKey: "isFromMeditation")
@@ -325,7 +327,7 @@ extension MeditationViewController: UITableViewDelegate, UITableViewDataSource {
             exerciseTimeVC.meditationAudioRequestData = MeditationAudioRequest(meditationId: meditationData.meditationId, chakraId: "", exerciseId: defaultExerciseID as? String, exerciseName: defaultExerciseName as? String, time: nil, VCName: ConstantMeditationStaticName.manifestation)
             navigationController?.pushViewController(exerciseTimeVC, animated: true)
             break
-        case 2:
+        case 3:
 //            selectedIndex = indexPath
 //            showPopup()
             UserDefaults.standard.set(true, forKey: "isFromMeditation")
@@ -334,15 +336,25 @@ extension MeditationViewController: UITableViewDelegate, UITableViewDataSource {
             exerciseTimeVC.meditationAudioRequestData = MeditationAudioRequest(meditationId: meditationData.meditationId, chakraId: "", exerciseId: defaultExerciseID as? String, exerciseName: defaultExerciseName as? String, time: nil, VCName: ConstantMeditationStaticName.performance)
             navigationController?.pushViewController(exerciseTimeVC, animated: true)
             break
-        case 3:
-//            selectedIndex = indexPath
+        case 1:
+//            selectedIndex = indexPath  MeditationAudioListViewController
+//            showPopup()
+            UserDefaults.standard.set(true, forKey: "isFromMeditation")
+            let MeditationVC = ConstantStoryboard.Meditation.instantiateViewController(withIdentifier: "MeditationAudioListViewController") as! MeditationAudioListViewController
+            MeditationVC.meditationAudioRequest = MeditationAudioRequest(meditationId: meditationData.meditationId, chakraId: "", exerciseId: defaultExerciseID as? String, exerciseName: defaultExerciseName as? String, time: nil, VCName: ConstantMeditationStaticName.guided)
+            navigationController?.pushViewController(MeditationVC, animated: true)
+            
+
+            break
+        case 4:
+//            selectedIndex = indexPath  MeditationAudioListViewController
 //            showPopup()
             UserDefaults.standard.set(true, forKey: "isFromMeditation")
             let soothingVC = ConstantStoryboard.soothingMusicVideo.instantiateViewController(withIdentifier: "SoothingVideosListViewController") as! SoothingVideosListViewController
             navigationController?.pushViewController(soothingVC, animated: true)
             break
             
-        case 4:
+        case 5:
             UserDefaults.standard.set(true, forKey: "isFromMeditation")
             let badgeVC = ConstantStoryboard.badgesStoryboard.instantiateViewController(withIdentifier: "BadgeViewController") as! BadgeViewController
 //            if let userBadge = badgeData {

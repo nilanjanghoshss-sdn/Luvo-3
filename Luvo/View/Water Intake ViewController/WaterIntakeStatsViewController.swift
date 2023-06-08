@@ -206,6 +206,10 @@ class WaterIntakeStatsViewController: UIViewController {
         
         let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
         print("coloris ...--->>>",chakraColour)
+        let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+               
+               print(crownList)
+
         
         if chakraColour==0 {
             switch chakraLevel {
@@ -249,7 +253,7 @@ class WaterIntakeStatsViewController: UIViewController {
                 viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
                 break
             }
-        } else {
+        } else if crownList == 1 {
             switch chakraColour {
             case 1:
                 //red
@@ -291,6 +295,51 @@ class WaterIntakeStatsViewController: UIViewController {
                 viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
                 break
             }
+        }
+        else{
+            
+            switch chakraLevel {
+            case 1:
+                //red
+                viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 2:
+                //orange
+                viewAcheivment.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 3:
+                //yellow
+                viewAcheivment.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 4:
+                //green
+                viewAcheivment.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 5:
+                //blue
+                viewAcheivment.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+            
+            case 6:
+                //violet
+                viewAcheivment.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            case 7:
+                //purple
+                viewAcheivment.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+                
+            default:
+                //red
+                viewAcheivment.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: false, leftToRight: true, topToBottom: false, bottomToTop: false)
+                break
+            }
+            
         }
        
     }

@@ -55,6 +55,9 @@ class SideMenuViewController: UIViewController {
         let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
         let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
         print("coloris ...--->>>",chakraColour)
+        let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+               
+               print(crownList)
         
         if chakraColour==0 {
         switch chakraLevel {
@@ -90,7 +93,7 @@ class SideMenuViewController: UIViewController {
             viewBackground.setGradientBackground(hexColor: ["#ed020c", "#f2434b"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
             break
         }
-        }else{
+        }else if crownList == 1{
             switch chakraColour {
             case 1:
                 viewBackground.setGradientBackground(hexColor: ["#ed020c", "#f2434b"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
@@ -124,6 +127,42 @@ class SideMenuViewController: UIViewController {
                 viewBackground.setGradientBackground(hexColor: ["#ed020c", "#f2434b"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
                 break
             }
+        }
+        else{
+            switch chakraLevel {
+            case 1:
+                viewBackground.setGradientBackground(hexColor: ["#ed020c", "#f2434b"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
+                break
+                
+            case 2:
+                viewBackground.setGradientBackground(hexColor: ["#f46d02", "#f89c53"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
+                break
+                
+            case 3:
+                viewBackground.setGradientBackground(hexColor: ["#feb303", "#fecd58"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
+                break
+                
+            case 4:
+                viewBackground.setGradientBackground(hexColor: ["#04a72f", "#40bc61"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
+                break
+                
+            case 5:
+                viewBackground.setGradientBackground(hexColor: ["#02aeef", "#56c8f4"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
+                break
+            
+            case 6:
+                viewBackground.setGradientBackground(hexColor: ["#5e29a7", "#865fbd"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
+                break
+                
+            case 7:
+                viewBackground.setGradientBackground(hexColor: ["#8803a3", "#9e1698"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
+                break
+                
+            default:
+                viewBackground.setGradientBackground(hexColor: ["#ed020c", "#f2434b"], rightToLeft: false, leftToRight: false, topToBottom: true, bottomToTop: false)
+                break
+            }
+            
         }
     }
     

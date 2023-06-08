@@ -493,6 +493,7 @@ class SleepRecordsAndroidViewController: UIViewController {
             
             //, device_cat: "watch"
             let requestt = SleepStatRequest(startDate: startDate, endDate: endDate, device_cat: "watch")
+         //   let requestt = SleepStatRequest(startDate: startDate, endDate: endDate)
             self.view.startActivityIndicator(title: ConstantActivityIndicatorMessage.pkLoading, color: .white)
             sleepVM.postGetSleepStat(sleepStatRequest: requestt, token: token)
         }

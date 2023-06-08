@@ -121,7 +121,15 @@ class GratitudeAddViewController: UIViewController, GratitudeAddDelegate, Gratit
         
         //Color setup according to chakra level
         let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
-                
+        let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
+               let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+               
+               print(crownList)
+               print("chakra level ...--->>>",chakraLevel)
+               print("coloris ...--->>>",chakraColour)
+        
+        if chakraColour == 0
+        {
         switch chakraLevel {
         case 1:
             btnSubmit.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
@@ -162,6 +170,94 @@ class GratitudeAddViewController: UIViewController, GratitudeAddDelegate, Gratit
             btnSubmit.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
             
             break
+        }
+        }else if crownList == 1
+        {
+            switch chakraColour {
+            case 1:
+                btnSubmit.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 2:
+                btnSubmit.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 3:
+                btnSubmit.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 4:
+                btnSubmit.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 5:
+                btnSubmit.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+            
+            case 6:
+                btnSubmit.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 7:
+                btnSubmit.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            default:
+                btnSubmit.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+            }
+        }
+        else{
+            
+            switch chakraLevel {
+            case 1:
+                btnSubmit.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 2:
+                btnSubmit.setGradientBackground(hexColor: ["#f46d02","#f8a562"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 3:
+                btnSubmit.setGradientBackground(hexColor: ["#fdb200","#fecf61"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 4:
+                btnSubmit.setGradientBackground(hexColor: ["#00a62c","#61c87c"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 5:
+                btnSubmit.setGradientBackground(hexColor: ["#00adef","#96ddf8"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+            
+            case 6:
+                btnSubmit.setGradientBackground(hexColor: ["#5b26a6","#a284cc"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            case 7:
+                btnSubmit.setGradientBackground(hexColor: ["#8400A5","#A81F93"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+                
+            default:
+                btnSubmit.setGradientBackground(hexColor: ["#ed010b","#f24249"], rightToLeft: true, leftToRight: false, topToBottom: false, bottomToTop: false)
+                
+                break
+        }
         }
     }
     

@@ -47,7 +47,7 @@ class OTPViewController: UIViewController {
                 resendOtpAPI()
             }
         } else {
-//            self.showAlert(title: "OTP", message: tempOTP ?? "😎")  //temporary show alert, OTP will come in SMS
+            self.showAlert(title: "OTP", message: tempOTP ?? "😎")  //temporary show alert, OTP will come in SMS
         }
     }
     

@@ -4,6 +4,7 @@
 //
 //  Created by BEASMACUSR02 on 01/09/21.
 //
+import StripeApplePay
 import HealthKit
 import UIKit
 import CoreData
@@ -54,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
       //  self.isAppAlreadyLaunchedOnce()
      //   UserDefaults.standard.set(false, forKey: ConstantUserDefaultTag.udFromBackGround)
         //IQKeyboardManager
+        StripeAPI.defaultPublishableKey = "pk_live_51MR4HrLN2CBttmwhGRIByYVtk2OVquYLYeuUZwYStS6NN9DBSHWDIhoAelchfL94A2IKguWvfqPiYzW2wNcOO9Bp00REnQ6zvt"
         IQKeyboardManager.shared.enable = true
         //-------------------------------------
         
@@ -99,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         //AVAudioSession is defined here because to run audio playback in background.
         do{
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, policy: AVAudioSession.RouteSharingPolicy.default, options: AVAudioSession.CategoryOptions.defaultToSpeaker)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, policy: AVAudioSession.RouteSharingPolicy.default, options: [.defaultToSpeaker, .allowAirPlay, .allowBluetoothA2DP])
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error {
             print("AppDelegate--->\(error.localizedDescription)")
@@ -322,7 +324,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func startTimer() {
         
         countdownTimer?.invalidate() //cancels it if already running
-        countdownTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(calculateStepsData), userInfo: nil, repeats: true) //1hr call
+        countdownTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(calculateStepsData), userInfo: nil, repeats: true) //1hr call
     }
     
     @objc func calculateStepsData() {
@@ -755,7 +757,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
           
             
-            if (self.arrayStepDta?.count==0)
+            iasdfg@123f (self.arrayStepDta?.count==0)
             {
                 self.vil+=1
                 self.stepcount()
@@ -800,12 +802,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                         
                         var date = Date()
                         let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                       // formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
+                        formatter.timeZone = TimeZone(abbreviation: "UTC")
                         let myString = formatter.string(from: data.endDate)
                         let yourDate: Date? = formatter.date(from: myString)
-                        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                       // formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                         let updatedString = formatter.string(from: yourDate!)
                         print(updatedString)
+
+
+                            // UTC change according to reuiremnt to fix backend issue
+
+
+
                         
                         debugPrint(self.arrDistance.count)
                         debugPrint([vil])
@@ -983,12 +993,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                             
                             var date = Date()
                             let formatter = DateFormatter()
-                            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
+                            formatter.timeZone = TimeZone(abbreviation: "UTC")
                             let myString = formatter.string(from: data.endDate)
                             let yourDate: Date? = formatter.date(from: myString)
-                            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                           // formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                             let updatedString = formatter.string(from: yourDate!)
                             print(updatedString)
+
+
+                            
+
+
                             
                             debugPrint(self.arrDistance.count)
                             debugPrint([vil])
@@ -1045,6 +1061,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
      
     }
+
+
     
     func WatchHeartrate ()
     {
@@ -1062,17 +1080,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                  {
                      return
                  }
+                
+                 if result?.isEmpty == true
+                 {
+                     debugPrint("h")
+                     return
+                 }
+                 else
+                 {
+                     
 
-
-
-                 let data = result![0] as! HKQuantitySample
+                 let data = result?[0] as! HKQuantitySample
                //  print(result!)
                  let unit = HKUnit (from: "count/min")
                  let latestHR = data.quantity.doubleValue(for: unit)
                  print("Latest HR\(latestHR) BPM")
 
                  let dateformatter = DateFormatter()
-                 dateformatter.dateFormat = "yyyy-MM-dd hh:mm: s"
+                 dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                 dateformatter.timeZone = TimeZone(abbreviation: "UTC")
                  let startdatee = dateformatter.string(from: data.startDate)
                 // let enddatee = dateformatter.string(from: data.enddate)
                  print("StartDate \(startdatee)")
@@ -1106,10 +1132,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                  self.heartViewModel.postWatchHeartRateData(heartDataRequest: request, token: token)
 
              }
-
+             }
+             
              self.healthStore.execute(queryy)
 
-
+             
     }
 
     func distancetravel()

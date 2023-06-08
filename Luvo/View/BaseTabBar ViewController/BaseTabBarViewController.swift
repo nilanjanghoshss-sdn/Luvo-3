@@ -91,6 +91,7 @@ class BaseTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         isFromTabarMeditation = true
         indexpath=nil
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            UserDefaults.standard.set(false, forKey: "FromHomeEdit")
             let rootView = self.viewControllers![self.selectedIndex] as! UINavigationController
             rootView.popToRootViewController(animated: false)
         }

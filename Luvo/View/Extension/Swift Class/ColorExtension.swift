@@ -64,6 +64,9 @@ extension UIColor {
         
         let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 0
         print("coloris ...--->>>",chakraColour)
+        let crownList = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraCrownListen) as? Int ?? 1
+               
+               print(crownList)
         
         if chakraColour==0 {
             switch chakraLevel {
@@ -92,7 +95,7 @@ extension UIColor {
                 return UIColor(hexString: ConstantThemeSolidColor.red)
             }
         }
-        else {
+        else if crownList == 1{
             switch chakraColour {
             case 1:
                 return UIColor(hexString: ConstantThemeSolidColor.red)
@@ -115,6 +118,34 @@ extension UIColor {
             case 7:
                 return UIColor(hexString: ConstantThemeSolidColor.violet)
 
+            default:
+                return UIColor(hexString: ConstantThemeSolidColor.red)
+            }
+        }
+        else{
+            
+            switch chakraLevel {
+            case 1:
+                return UIColor(hexString: ConstantThemeSolidColor.red)
+                
+            case 2:
+                return UIColor(hexString: ConstantThemeSolidColor.orange)
+                
+            case 3:
+                return UIColor(hexString: ConstantThemeSolidColor.yellow)
+                
+            case 4:
+                return UIColor(hexString: ConstantThemeSolidColor.green)
+                
+            case 5:
+                return UIColor(hexString: ConstantThemeSolidColor.blue)
+            
+            case 6:
+                return UIColor(hexString: ConstantThemeSolidColor.purple)
+                
+            case 7:
+                return UIColor(hexString: ConstantThemeSolidColor.violet)
+                
             default:
                 return UIColor(hexString: ConstantThemeSolidColor.red)
             }

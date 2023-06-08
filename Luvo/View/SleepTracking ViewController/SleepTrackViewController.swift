@@ -25,7 +25,7 @@ class SleepTrackViewController: UIViewController{
     @IBOutlet var viewCustomNavBar: UIView!
     @IBOutlet var viewNotificationCount: UIView_Designable!
     @IBOutlet var lblNotificationLabel: UILabel!
-    
+    private var countdownTimer: Timer?
     @IBOutlet var imgBackground: UIImageView!
     @IBOutlet var btnSleep: UIBUtton_Designable!
     @IBOutlet var imgRipple: UIImageView!
@@ -87,7 +87,8 @@ class SleepTrackViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+// close by nilanjan, as sanjib want to stick with phase one sleep tracking
+        /*
         let status = UserDefaults.standard.bool(forKey: "isFromWatch")
         print(status)
         if status==true
@@ -95,10 +96,10 @@ class SleepTrackViewController: UIViewController{
         btnStartStop.setTitle("SLEEP TRACKING", for: .normal)
         }
         else
-        {
+        {*/
             
             btnStartStop.setTitle("START SLEEP", for: .normal)
-        }
+       // }
         setupClock()
         checkSyncData()
     }
@@ -240,11 +241,11 @@ class SleepTrackViewController: UIViewController{
 //
 //                                            }])
 //        } else {  SleepRecordsAndroidViewController
-//            let sleepRecordVC = ConstantStoryboard.sleepStoryboard.instantiateViewController(withIdentifier: "SleepRecordsViewController") as! SleepRecordsViewController
-//            self.navigationController?.pushViewController(sleepRecordVC, animated: true)
+            let sleepRecordVC = ConstantStoryboard.sleepStoryboard.instantiateViewController(withIdentifier: "SleepRecordsViewController") as! SleepRecordsViewController
+            self.navigationController?.pushViewController(sleepRecordVC, animated: true)
         
-        let sleepRecordVC = ConstantStoryboard.sleepStoryboard.instantiateViewController(withIdentifier: "SleepRecordsAndroidViewController") as! SleepRecordsAndroidViewController
-        self.navigationController?.pushViewController(sleepRecordVC, animated: true)
+//        let sleepRecordVC = ConstantStoryboard.sleepStoryboard.instantiateViewController(withIdentifier: "SleepRecordsAndroidViewController") as! SleepRecordsAndroidViewController
+//        self.navigationController?.pushViewController(sleepRecordVC, animated: true)
         
         
 //        }
@@ -302,7 +303,8 @@ class SleepTrackViewController: UIViewController{
     
     //MARK: ---- Tap Gesture Function
     @objc private func singleTap() {
-        
+        // close by nilanjan, as sanjib want to stick with phase one sleep tracking
+                /*
         let status = UserDefaults.standard.bool(forKey: "isFromWatch")
         print(status)
         if status==true
@@ -312,7 +314,7 @@ class SleepTrackViewController: UIViewController{
         }
         else
         {
-            print("first phase")
+            print("first phase")*/
         if boolStartStop {
             openAlertWithButtonFunc(title: ConstantAlertTitle.LuvoAlertTitle,
                                     message: "Sleep monitor takes at least 30 minutes to measure your sleep behavior. The ideal way is to keep the phone next to the bed, preferably on the nightstand.",
@@ -368,7 +370,7 @@ class SleepTrackViewController: UIViewController{
                                         }])
         }
     }
-}
+//}
     @objc private func longTap() {
         if !boolStartStop {
             boolStartStop = true
@@ -686,8 +688,23 @@ extension SleepTrackViewController: AVAudioPlayerDelegate, AVAudioRecorderDelega
     private func StartSleepTrack() {
         //Microphone recording
         self.StartMicrophone()
+        
+        self.startTimer()
+    }
+    func startTimer() {
+        DispatchQueue.main.async {
+            self.countdownTimer?.invalidate() //cancels it if already running
+            self.countdownTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.stopAudio), userInfo: nil, repeats: true) //1hr call
+    }
     }
     
+    @objc func stopAudio()
+    {
+                //Microphone recording
+               if let record = self.audioRecorder {
+                   record.stop()
+                }
+    }
     private func StopSleepTrack() {
         //Audio Player
         if let player = player {
@@ -710,7 +727,7 @@ extension SleepTrackViewController: AVAudioPlayerDelegate, AVAudioRecorderDelega
         let session = AVAudioSession.sharedInstance()
         
         do{
-            try session.setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, policy: AVAudioSession.RouteSharingPolicy.default, options: AVAudioSession.CategoryOptions.defaultToSpeaker)
+            try session.setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, policy: AVAudioSession.RouteSharingPolicy.default, options: [.defaultToSpeaker, .allowAirPlay, .allowBluetoothA2DP])
             try session.setActive(true)
             session.requestRecordPermission({ (allowed : Bool) -> Void in
                 if allowed {
@@ -1093,8 +1110,10 @@ extension SleepTrackViewController: SleepViewModelDelegate {
                         let formParameters = [formParameterName.duration.rawValue: durationToData,
                                               formParameterName.start_time.rawValue: startTimeStringToData,
                                               formParameterName.end_time.rawValue: endTimeStringToData]
+                     //   let formParameters = [formParameterName.duration.rawValue: durationToData]
                         
-                        //API call
+                        //API call device_type: "Apple watch" device_cat: "mobile"
+                       // sleepVM.uploadSleepData(mediaData: audioData, sleepData: sleep, formParam: formParameters, token: token)
                         sleepVM.uploadSleepData(mediaData: audioData, sleepData: sleep, formParam: formParameters, token: token)
                         
 //                        //temp

@@ -3,9 +3,10 @@
 
 target 'Luvo' do
   # Comment the next line if you don't want to use dynamic frameworks
-  #use_frameworks!
+  use_frameworks!
 
   # Pods for Luvo
+
 pod 'FBSDKLoginKit'
 pod 'IQKeyboardManagerSwift'
 pod 'SDWebImage', :modular_headers => true
@@ -16,14 +17,10 @@ pod 'Firebase/Auth'
 pod 'Firebase/Analytics'
 pod 'Firebase/Firestore'
 pod 'Firebase/Crashlytics'
+pod 'FirebaseDatabase'
+Pod 'Firebase/DynamicLinks'
 pod 'GoogleSignIn'
 pod 'MarqueeLabel'
 pod 'Charts'
-pod 'FacebookSDK'
-pod 'FacebookSDK/LoginKit'
-pod 'FacebookSDK/ShareKit'
-pod 'FacebookSDK/PlacesKit'
-
-pod 'FBSDKMessengerShareKit'
 
 end

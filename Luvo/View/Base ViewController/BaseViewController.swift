@@ -96,6 +96,7 @@ class BaseViewController: UIViewController {
     
     //MARK: - Button Func
     @objc func btnMeditation() {
+        debugPrint("Hello")
         //change btn image accordingly. If not working then you need to call the extension functions from the viewController.
     }
 
@@ -104,9 +105,11 @@ class BaseViewController: UIViewController {
 extension BaseViewController {
     //Internal Func
     func baseVCSelectedMeditation() {
+        debugPrint("Hello")
         
     }
     func baseVCSelectedExercise() {
+        debugPrint("Hello")
         
     }
     func baseVCSelectedHome() {

@@ -32,8 +32,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet var viewAboutUs: UIView!
     @IBOutlet var viewChangePass: UIView!
     @IBOutlet var viewInviteOther: UIView!
+    @IBOutlet var viewDeleteAccount: UIView!
     var healthStore = HKHealthStore()
     var setingViewModel = SettingsViewModel()
+    var HomeModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,7 @@ class SettingsViewController: UIViewController {
         setupCustomNavBar()
         
         setingViewModel.settingNotificationDelegate = self
+        HomeModel.deleteUserDelegate = self
         
         setupTapGesture()
         setupGUI()
@@ -114,6 +117,9 @@ class SettingsViewController: UIViewController {
         
         let inviteTap = UITapGestureRecognizer.init(target: self, action: #selector(SettingsViewController.tapInvite(_:)))
         viewInviteOther.addGestureRecognizer(inviteTap)
+
+        let DeleteTap = UITapGestureRecognizer.init(target: self, action: #selector(SettingsViewController.DeleteInvit(_:)))
+        viewDeleteAccount.addGestureRecognizer(DeleteTap)
     }
     
     private func setupGUI() {
@@ -163,6 +169,44 @@ class SettingsViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: "FromSettings")
         let signupVC = ConstantStoryboard.videoPlay.instantiateViewController(identifier: "VideoPlay") as! VideoPlay
         self.navigationController?.pushViewController(signupVC, animated: true)
+    }
+
+    @objc func DeleteInvit(_ sender: UITapGestureRecognizer) {
+
+
+        let refreshAlert = UIAlertController(title: "Luvo", message: "Do you want to delete your acount", preferredStyle: UIAlertController.Style.alert)
+
+        refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+              print("Handle Ok logic here")
+
+
+            guard let fcmToken = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udFCMToken) as? String else {
+               // self.view.stopActivityIndicator()
+                return
+            }
+
+            print(fcmToken)
+
+            guard let token = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udToken) as? String else {
+                //self.view.stopActivityIndicator()
+                return
+            }
+
+
+            let request = DeleteUserRequest(fcm: fcmToken, isDeleted: true)
+            self.view.startActivityIndicator(title: ConstantActivityIndicatorMessage.pkLoading, color: .white)
+            self.HomeModel.DeleteUserData(DeleteRequest: request, token: token)
+
+        }))
+
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+              print("Handle Ok logic here")
+
+        }))
+
+
+
+        present(refreshAlert, animated: true, completion: nil)
     }
     
     //MARK: Switch Func-------------------------
@@ -363,3 +407,39 @@ extension SettingsViewController: SettingNotificationDelegate {
     }
     
 }
+
+extension SettingsViewController : DeleteUserDelegate
+{
+    func didReceiveDeleteUserResponse(DeleteResponse: DeleteUserResponse?) {
+        if(DeleteResponse?.status != nil && DeleteResponse?.status?.lowercased() == ConstantStatusAPI.success) {
+        self.view.stopActivityIndicator()
+        print("DATA======<><><><>", DeleteResponse ?? "")
+//
+//            for controller in self.navigationController!.viewControllers as Array {
+//                if controller.isKind(of: LoginViewController.self) {
+//                    self.navigationController!.popToViewController(controller, animated: true)
+//                    break
+//                }
+//            }
+
+            let initialViewController = ConstantStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            let rootNC = UINavigationController(rootViewController: initialViewController)
+            rootNC.isNavigationBarHidden = true
+
+            let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
+            sceneDelegate.window!.rootViewController = rootNC
+        }
+        else {
+            showAlert(title: ConstantAlertTitle.LuvoAlertTitle, message: DeleteResponse?.message ?? ConstantStatusAPI.failed)
+        }
+
+    }
+
+    func didReceiveDeleteUserError(statusCode: String?) {
+
+    }
+
+
+
+}
+

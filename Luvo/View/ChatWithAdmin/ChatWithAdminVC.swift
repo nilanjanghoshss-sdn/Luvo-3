@@ -296,11 +296,11 @@ extension ChatWithAdminVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
             } else {
                 let cell = chatTableView.dequeueReusableCell(withIdentifier: "ChatWithAdminTableViewCell") as! ChatWithAdminTableViewCell
-                cell.selectionStyle = .none
-                cell.updtaeSendTableCellData(cellData: data!)
-                if let sendTime = data?.addDate {
-                cell.lebelReadTime.text = chatViewModel.convertDateToStringFormat(dateString: sendTime, format: DateFormats.dateFormatForChatTime)
-                }
+            //    cell.selectionStyle = .none
+            //    cell.updtaeSendTableCellData(cellData: data!)
+            //    if let sendTime = data?.addDate {
+            //    cell.lebelReadTime.text = chatViewModel.convertDateToStringFormat(dateString: sendTime, format: DateFormats.dateFormatForChatTime)
+            //    }
                 return cell
             }
         }
@@ -332,6 +332,7 @@ extension ChatWithAdminVC: ChatWithAdminViewModelDelegate {
     func didReceiveMessagesDataResponse(chatDataResponse: ChatWithAdminResponse?) {
         self.view.stopActivityIndicator()
         if(chatDataResponse?.status != nil && chatDataResponse?.status?.lowercased() == ConstantStatusAPI.success) {
+            debugPrint(chatDataResponse)
             if let arrMessage = chatDataResponse?.messages {
                 let reverseArray: [Message] = arrMessage.reversed()
                 let arrayWithSection = chatViewModel.getChatWithSection(chatArray: reverseArray)

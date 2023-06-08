@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Nunito-SemiBold.ttf">
+            <string>Nunito-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserChatReceiveTableViewCell" id="ARz-K0-Nnd" customClass="UserChatReceiveTableViewCell" customModule="Luvo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="117"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ARz-K0-Nnd" id="95z-dF-clX">
+                <rect key="frame" x="0.0" y="0.0" width="335" height="117"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbb-wt-ucO">
+                        <rect key="frame" x="50" y="8" width="275" height="99.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Z8-xs-W8f">
+                                <rect key="frame" x="0.0" y="0.0" width="255" height="77.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Imbalance leads to loneliness, depression, anxiety, confusion. Balance leads to peace" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Yzg-eB-0MA">
+                                        <rect key="frame" x="12" y="12" width="231" height="53.5"/>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="13"/>
+                                        <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="adminChatColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Yzg-eB-0MA" secondAttribute="bottom" constant="12" id="Xvc-aM-Rra"/>
+                                    <constraint firstItem="Yzg-eB-0MA" firstAttribute="leading" secondItem="3Z8-xs-W8f" secondAttribute="leading" constant="12" id="t7d-qw-MrH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Yzg-eB-0MA" secondAttribute="trailing" constant="12" id="tSg-lG-0UV"/>
+                                    <constraint firstItem="Yzg-eB-0MA" firstAttribute="top" secondItem="3Z8-xs-W8f" secondAttribute="top" constant="12" id="vxe-Nk-vYk"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read: 1:45" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="zAw-Po-vSN">
+                                <rect key="frame" x="167.5" y="82.5" width="58.5" height="16.5"/>
+                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="12"/>
+                                <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elR-u3-FQb">
+                                <rect key="frame" x="242" y="62.5" width="25" height="25"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="EN5-bQ-hGM"/>
+                                    <constraint firstAttribute="height" constant="25" id="jQn-Uo-Itw"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat" translatesAutoresizingMaskIntoConstraints="NO" id="aYc-dg-y2o">
+                                <rect key="frame" x="242" y="62.5" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="OTo-0k-v12"/>
+                                    <constraint firstAttribute="width" constant="25" id="vLh-ET-gmZ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zAw-Po-vSN" firstAttribute="top" secondItem="3Z8-xs-W8f" secondAttribute="bottom" constant="5" id="8EF-9b-fCJ"/>
+                            <constraint firstItem="aYc-dg-y2o" firstAttribute="centerX" secondItem="elR-u3-FQb" secondAttribute="centerX" id="9Yc-Ee-ESL"/>
+                            <constraint firstItem="elR-u3-FQb" firstAttribute="leading" secondItem="zAw-Po-vSN" secondAttribute="trailing" constant="16" id="HPD-D6-9fF"/>
+                            <constraint firstAttribute="trailing" secondItem="elR-u3-FQb" secondAttribute="trailing" constant="8" id="LLD-rd-YKZ"/>
+                            <constraint firstItem="3Z8-xs-W8f" firstAttribute="top" secondItem="Sbb-wt-ucO" secondAttribute="top" id="OcE-Fi-jlN"/>
+                            <constraint firstItem="aYc-dg-y2o" firstAttribute="centerY" secondItem="elR-u3-FQb" secondAttribute="centerY" id="dio-kH-z43"/>
+                            <constraint firstAttribute="trailing" secondItem="3Z8-xs-W8f" secondAttribute="trailing" constant="20" id="fFf-2o-My7"/>
+                            <constraint firstItem="3Z8-xs-W8f" firstAttribute="leading" secondItem="Sbb-wt-ucO" secondAttribute="leading" id="sz4-5Y-f5Q"/>
+                            <constraint firstItem="elR-u3-FQb" firstAttribute="bottom" secondItem="3Z8-xs-W8f" secondAttribute="bottom" constant="10" id="tBV-z4-Nej"/>
+                            <constraint firstAttribute="bottom" secondItem="zAw-Po-vSN" secondAttribute="bottom" constant="0.5" id="v3t-TV-jRT"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Sbb-wt-ucO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="95z-dF-clX" secondAttribute="leading" constant="50" id="CZx-5T-slQ"/>
+                    <constraint firstAttribute="bottom" secondItem="Sbb-wt-ucO" secondAttribute="bottom" constant="9.5" id="UXf-8v-O04"/>
+                    <constraint firstItem="Sbb-wt-ucO" firstAttribute="top" secondItem="95z-dF-clX" secondAttribute="top" constant="8" id="ikd-rp-vcQ"/>
+                    <constraint firstAttribute="trailing" secondItem="Sbb-wt-ucO" secondAttribute="trailing" constant="10" id="mj9-tF-itA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="J2r-D0-VSg"/>
+            <connections>
+                <outlet property="labelMessage" destination="Yzg-eB-0MA" id="uqS-SD-yTp"/>
+                <outlet property="lebelReadTime" destination="zAw-Po-vSN" id="ft8-DJ-7xv"/>
+                <outlet property="userButtonIMage" destination="elR-u3-FQb" id="TBH-zU-RcH"/>
+                <outlet property="userImage" destination="aYc-dg-y2o" id="POk-ZZ-6u0"/>
+                <outlet property="viewBubble" destination="3Z8-xs-W8f" id="4RP-KS-rBV"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="83"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chat" width="17" height="14.5"/>
+        <namedColor name="adminChatColor">
+            <color red="0.91399997472763062" green="0.875" blue="0.9100000262260437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

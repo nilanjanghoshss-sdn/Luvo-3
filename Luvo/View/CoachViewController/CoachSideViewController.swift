@@ -31,7 +31,7 @@ class CoachSideViewController: UIViewController {
     @IBOutlet var lblProfileName: UILabel!
     var lastSelectedIndexPath:IndexPath?
     var delegate:SideMenuDelegate?
-    
+   
     var profileVC = ProfileViewController()
 
     override func viewDidLoad() {
@@ -44,17 +44,22 @@ class CoachSideViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         debugPrint("SIDE MENU WILL APPEAR----->")
+        UserDefaults.standard.set(true, forKey: "Isfromcoachsideview")
         setupGradientBackground()
         setupGUI()
         SideMenuInit()
         setupProfileData()
+      
     }
     
     func setupGradientBackground() {
         
         //Color setup according to chakra level
-        let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
-        let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
+     //   let chakraLevel = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udBlockedChakraLevel) as? Int ?? 1
+     //   let chakraColour = UserDefaults.standard.value(forKey: ConstantUserDefaultTag.udChakraColorchange) as? Int ?? 1
+        
+        let chakraLevel = 7
+        let chakraColour = 0
         print("coloris ...--->>>",chakraColour)
         
         if chakraColour==0 {
@@ -140,16 +145,16 @@ class CoachSideViewController: UIViewController {
     
     func SideMenuInit() {
         sideMenuArray.append(SideMenuModel(menuTitle: "Application Settings", menuIcon: "settings"))
-        sideMenuArray.append(SideMenuModel(menuTitle: "Blooooog", menuIcon: "blog"))
-        sideMenuArray.append(SideMenuModel(menuTitle: "Favorite", menuIcon: "favourite"))
-        sideMenuArray.append(SideMenuModel(menuTitle: "Your Chakra Level", menuIcon: "chakraLevel"))
+      //  sideMenuArray.append(SideMenuModel(menuTitle: "Blooooog", menuIcon: "blog"))
+      //  sideMenuArray.append(SideMenuModel(menuTitle: "Favorite", menuIcon: "favourite"))
+        sideMenuArray.append(SideMenuModel(menuTitle: "Recorded Session", menuIcon: "chakraLevel"))
         sideMenuArray.append(SideMenuModel(menuTitle: "Share With Friends & Family", menuIcon: "share"))
-        sideMenuArray.append(SideMenuModel(menuTitle: "FAQ", menuIcon: "faq"))
+      //  sideMenuArray.append(SideMenuModel(menuTitle: "FAQ", menuIcon: "faq"))
         sideMenuArray.append(SideMenuModel(menuTitle: "Terms Of Service & Privacy Policy", menuIcon: "terms"))
         sideMenuArray.append(SideMenuModel(menuTitle: "Contact Us", menuIcon: "contactUs"))
         sideMenuArray.append(SideMenuModel(menuTitle: "Chat With Admin", menuIcon: "chat"))
         sideMenuArray.append(SideMenuModel(menuTitle: "Rate This App", menuIcon: "rateNew"))
-        sideMenuArray.append(SideMenuModel(menuTitle: "Retake The Quiz", menuIcon: "questions"))
+     //   sideMenuArray.append(SideMenuModel(menuTitle: "Retake The Quiz", menuIcon: "questions"))
         sideMenuArray.append(SideMenuModel(menuTitle: "Log Out", menuIcon: "logout"))
     }
     

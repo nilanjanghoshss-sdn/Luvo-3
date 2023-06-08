@@ -9,10 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Nunito-ExtraBold.ttf">
+        <array key="Nunito-VariableFont_wght.ttf">
             <string>Nunito-ExtraBold</string>
-        </array>
-        <array key="Nunito-SemiBold.ttf">
             <string>Nunito-SemiBold</string>
         </array>
     </customFonts>
@@ -32,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="750"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="PHr-6q-218">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="407"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="458"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBI-HM-jyU">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -320,8 +318,50 @@
                                                             <constraint firstItem="uMh-Wi-dHt" firstAttribute="leading" secondItem="Dv9-CW-xua" secondAttribute="trailing" constant="8" symbolic="YES" id="zX8-9x-zaB"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6hB-HL-PlE">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBp-3M-QSZ">
                                                         <rect key="frame" x="0.0" y="357" width="414" height="50"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark.bin.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0wT-8z-036">
+                                                                <rect key="frame" x="8" y="8.5" width="34" height="33"/>
+                                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="34" id="EUs-Lp-dJx"/>
+                                                                    <constraint firstAttribute="height" constant="34" id="th3-Fn-HQQ"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete My Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LS0-rn-2IS">
+                                                                <rect key="frame" x="50" y="8" width="308" height="34"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="34" id="aeN-zf-Uzq"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
+                                                                <color key="textColor" red="0.3803921569" green="0.3803921569" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Path 53" translatesAutoresizingMaskIntoConstraints="NO" id="bWd-I8-kgS">
+                                                                <rect key="frame" x="366" y="8" width="34" height="34"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="34" id="VqZ-bu-IXU"/>
+                                                                    <constraint firstAttribute="width" constant="34" id="lnx-U9-qBy"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="bWd-I8-kgS" secondAttribute="bottom" constant="8" id="CBe-R3-ove"/>
+                                                            <constraint firstItem="bWd-I8-kgS" firstAttribute="leading" secondItem="LS0-rn-2IS" secondAttribute="trailing" constant="8" symbolic="YES" id="Dq6-jN-zSr"/>
+                                                            <constraint firstAttribute="bottom" secondItem="LS0-rn-2IS" secondAttribute="bottom" constant="8" id="Jag-Vf-4Tq"/>
+                                                            <constraint firstAttribute="bottom" secondItem="0wT-8z-036" secondAttribute="bottom" constant="8" id="KMj-i8-t4H"/>
+                                                            <constraint firstItem="LS0-rn-2IS" firstAttribute="leading" secondItem="0wT-8z-036" secondAttribute="trailing" constant="8" symbolic="YES" id="KnQ-YX-rrs"/>
+                                                            <constraint firstItem="LS0-rn-2IS" firstAttribute="top" secondItem="UBp-3M-QSZ" secondAttribute="top" constant="8" id="NgH-Xf-nMY"/>
+                                                            <constraint firstItem="0wT-8z-036" firstAttribute="leading" secondItem="UBp-3M-QSZ" secondAttribute="leading" constant="8" id="bPO-BK-Mjk"/>
+                                                            <constraint firstItem="bWd-I8-kgS" firstAttribute="top" secondItem="UBp-3M-QSZ" secondAttribute="top" constant="8" id="jGm-UC-G4a"/>
+                                                            <constraint firstItem="0wT-8z-036" firstAttribute="top" secondItem="UBp-3M-QSZ" secondAttribute="top" constant="8" id="ke3-kF-bTW"/>
+                                                            <constraint firstAttribute="trailing" secondItem="bWd-I8-kgS" secondAttribute="trailing" constant="14" id="vN1-5y-ENa"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6hB-HL-PlE">
+                                                        <rect key="frame" x="0.0" y="408" width="414" height="50"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_fill" translatesAutoresizingMaskIntoConstraints="NO" id="QlM-E2-v6j">
                                                                 <rect key="frame" x="8" y="8" width="34" height="34"/>
@@ -503,6 +543,7 @@
                         <outlet property="viewAboutUs" destination="oHm-lf-lRG" id="q8m-WP-Wgb"/>
                         <outlet property="viewChangePass" destination="Cgf-nz-qzd" id="ddK-IG-EAJ"/>
                         <outlet property="viewCustomNavBar" destination="T5G-Kp-sGw" id="5Nh-mu-BuM"/>
+                        <outlet property="viewDeleteAccount" destination="UBp-3M-QSZ" id="VKo-JI-eA6"/>
                         <outlet property="viewInviteOther" destination="8xQ-bK-A9g" id="Zdz-x3-i8y"/>
                         <outlet property="viewNotificationCount" destination="GOZ-5n-2F2" id="HRk-sq-hgX"/>
                     </connections>
@@ -522,6 +563,7 @@
         <image name="share_fill" width="20" height="22.5"/>
         <image name="speaker.zzz.fill" catalog="system" width="128" height="85"/>
         <image name="video.circle" catalog="system" width="128" height="121"/>
+        <image name="xmark.bin.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
